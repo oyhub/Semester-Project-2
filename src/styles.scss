@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+@import "/src/styles/variables";
+@import "/src/styles/typography";
+@import "/src/styles/spacing";
+@import "/src/styles/layout";
+
+body {
+  background-color: $color-gray;
+}
+
+.background-container {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    max-height: 150vh;
+    background: linear-gradient(190deg, $color-dark 0%, $color-gray 75%);
+    z-index: -1;
+  }
+}

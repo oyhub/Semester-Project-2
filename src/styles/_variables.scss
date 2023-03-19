@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&family=Montserrat:wght@300;400;500&display=swap");
+@import url("https://use.typekit.net/qab4fck.css");
+
+$screen-sm: 370px;
+$screen-md: 769px;
+$screen-lg: 1025px;
+
+$font-top-heading: "miller-display", serif;
+$font-heading: "Montserrat", sans-serif;
+$font-paragraph: "Inter", sans-serif;
+
+$color-primary: #ee845a;
+$color-secondary: #c95390;
+$color-tertiary: #94c4e8;
+$color-netural: #e8eff5;
+$color-dark: #151c24;
+$color-dark-gray: #181f28;
+$color-gray: #273039;
+
+//Gradients
+$gradients: () !default;
+$gradients: map-merge(
+  (
+    dark: linear-gradient(190deg, $color-dark 0%, $color-gray 85%),
+    pink: linear-gradient(242deg, #e1736d 0%, #d7657c 100%),
+    orange: linear-gradient(242deg, $color-primary 20%, #e1736d 100%),
+  ),
+  $gradients
+);
+
+@mixin bg-gradient($parent, $gradient) {
+  #{$parent} {
+    background: $gradient;
+  }
+}
+
+@mixin border-gradient($parent, $gradient) {
+  #{$parent} {
+    border: 20px solid transparent;
+    border-width: 2px;
+    border-style: solid;
+    border-image: $gradient;
+    border-image-slice: 1;
+    border-radius: 10px;
+  }
+}
+
+@mixin border-gradient-rounded($parent, $gradient) {
+  #{$parent} {
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      padding: 4px;
+      background: $gradient;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+  }
+}
+
+@each $gradient, $value in $gradients {
+  @include bg-gradient(".bg-gradient-#{$gradient}", $value);
+}
+
+@each $gradient, $value in $gradients {
+  @include border-gradient(".border-gradient-#{$gradient}", $value);
+}
+
+@each $gradient, $value in $gradients {
+  $class: ".border-gradient-#{$gradient}-rounded";
+  @include border-gradient-rounded($class, $value);
+}

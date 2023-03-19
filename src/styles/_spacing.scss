@@ -1,0 +1,76 @@
+@use "sass:string";
+
+$base-size: 1rem;
+
+$sizes: (
+  "size-0": $base-size * 0,
+  "size-1": $base-size * 0.25,
+  "size-2": $base-size * 0.75,
+  "size-3": $base-size * 1,
+  "size-4": $base-size * 1.5,
+  "size-5": $base-size * 2,
+  "size-6": $base-size * 4,
+  "size-7": $base-size * 8,
+);
+
+$sides: top, right, bottom, left;
+
+@each $size-number, $size-value in $sizes {
+  $number: string.slice($size-number, 6);
+
+  //Padding
+  .p {
+    &-#{$number} {
+      padding: $size-value;
+    }
+
+    @each $side in $sides {
+      $side-value: string.slice($side, 1, 1);
+      &#{$side-value}-#{$number} {
+        padding-#{$side}: $size-value;
+      }
+    }
+  }
+
+  .px- {
+    &#{$number} {
+      padding-left: $size-value;
+      padding-right: $size-value;
+    }
+  }
+
+  .py- {
+    &#{$number} {
+      padding-top: $size-value;
+      padding-bottom: $size-value;
+    }
+  }
+
+  //margin
+  .m {
+    &-#{$number} {
+      margin: $size-value;
+    }
+
+    @each $side in $sides {
+      $side-value: string.slice($side, 1, 1);
+      &#{$side-value}-#{$number} {
+        margin-#{$side}: $size-value;
+      }
+    }
+  }
+
+  .mx- {
+    &#{$number} {
+      margin-left: $size-value;
+      margin-right: $size-value;
+    }
+  }
+
+  .my- {
+    &#{$number} {
+      margin-top: $size-value;
+      margin-bottom: $size-value;
+    }
+  }
+}
