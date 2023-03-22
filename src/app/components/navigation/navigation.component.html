@@ -1,1 +1,6 @@
-<p>navigation works!</p>
+<div *ngIf="(screenWidthDetectionService.screenStatus | async) === false">
+  <div class="hamburger-container">
+    <div class="hamburger"></div>
+  </div>
+</div>
+<p *ngIf="screenWidthDetectionService.screenStatus | async">big</p>

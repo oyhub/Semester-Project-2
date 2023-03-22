@@ -1,0 +1,5 @@
+{
+  "angular.suggest.includeCompletionsWithSnippetText": true,
+  "editor.autoClosingBrackets": "always",
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}

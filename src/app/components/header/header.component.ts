@@ -1,4 +1,5 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ScreenWidthDetectionService } from 'src/app/services/screen-width-detection.service';
 
 @Component({
   selector: 'ws-header',
@@ -6,18 +7,10 @@ import { Component, HostListener, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  mobile: boolean = true;
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    if (event.currentTarget.innerWidth >= 769) {
-      this.mobile = false;
-    } else {
-      this.mobile = true;
-    }
-  }
-
-  constructor() {}
+  title: string = 'Hello';
+  constructor(
+    public screenWidthDetectionService: ScreenWidthDetectionService
+  ) {}
 
   ngOnInit(): void {}
 }
