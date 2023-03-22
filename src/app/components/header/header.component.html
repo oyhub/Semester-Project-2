@@ -3,7 +3,9 @@
     <h1>
       <img src="../../../assets/images/logo.png" alt="The wine seller logo" />
     </h1>
-    <p *ngIf="!mobile" class="h4">Buy & sell Your wines online</p>
+    <p *ngIf="screenWidthDetectionService.screenStatus | async" class="h4">
+      Buy & sell Your wines online
+    </p>
   </div>
-  <div class="navigation">Navigation</div>
+  <ws-navigation></ws-navigation>
 </header>
