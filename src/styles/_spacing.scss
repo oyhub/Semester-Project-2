@@ -19,7 +19,7 @@ $sides: top, right, bottom, left;
   $number: string.slice($size-number, 6);
 
   //Padding
-  .p {
+  .ws-p {
     &-#{$number} {
       padding: $size-value;
     }
@@ -32,14 +32,14 @@ $sides: top, right, bottom, left;
     }
   }
 
-  .px- {
+  .ws-px- {
     &#{$number} {
       padding-left: $size-value;
       padding-right: $size-value;
     }
   }
 
-  .py- {
+  .ws-py- {
     &#{$number} {
       padding-top: $size-value;
       padding-bottom: $size-value;
@@ -47,7 +47,7 @@ $sides: top, right, bottom, left;
   }
 
   //margin
-  .m {
+  .ws-m {
     &-#{$number} {
       margin: $size-value;
     }
@@ -60,14 +60,14 @@ $sides: top, right, bottom, left;
     }
   }
 
-  .mx- {
+  .ws-mx- {
     &#{$number} {
       margin-left: $size-value;
       margin-right: $size-value;
     }
   }
 
-  .my- {
+  .ws-my- {
     &#{$number} {
       margin-top: $size-value;
       margin-bottom: $size-value;

@@ -5,7 +5,7 @@ body {
 }
 
 h1,
-.h1 {
+.ws-h1 {
   font-family: $font-top-heading;
   font-size: 2.6rem;
   letter-spacing: 0.25rem;
@@ -13,28 +13,28 @@ h1,
 }
 
 h2,
-.h2 {
+.ws-h2 {
   font-family: $font-heading;
   font-size: 1.563rem;
   font-weight: 400;
 }
 
 h3,
-.h3 {
+.ws-h3 {
   font-family: $font-heading;
   font-size: 1.375rem;
   font-weight: 300;
 }
 
 h4,
-.h4 {
+.ws-h4 {
   font-family: $font-heading;
   font-size: 1.125rem;
   font-weight: 300;
 }
 
 p,
-.p {
+.ws-p {
   font-size: 1rem;
 }
 
@@ -43,14 +43,15 @@ a {
 
   &:hover {
     color: $color-tertiary;
+    text-decoration: underline;
   }
 }
 
-.bold {
+.ws-bold {
   font-weight: bolder;
 }
 
-.listing-link {
+.ws-listing-link {
   font-family: $font-heading;
   font-size: 1.25rem;
   text-transform: uppercase;
@@ -62,29 +63,44 @@ a {
   }
 }
 
-.small {
+.ws-small {
   font-family: $font-paragraph;
   font-size: 0.875rem;
   letter-spacing: 0.03rem;
   font-weight: 200;
 
   &-uppercase {
+    color: $color-netural;
     font-family: $font-paragraph;
     text-transform: uppercase;
     font-size: 0.875rem;
     font-weight: 300;
+    text-decoration: none;
   }
 }
 
-.category-text {
+.ws-category-text {
   font-family: $font-heading;
   font-size: 0.938rem;
   font-weight: 400;
 }
 
-.cta-text {
+.ws-cta-text {
   font-family: $font-heading;
   font-size: 0.938rem;
   text-decoration: none;
   text-transform: uppercase;
+}
+
+.ws-nav-link {
+  font-family: $font-heading;
+  font-weight: 400;
+  font-size: 1.125rem;
+  color: $color-netural;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-tertiary;
+    text-decoration: underline;
+  }
 }

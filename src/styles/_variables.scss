@@ -53,11 +53,10 @@ $gradients: map-merge(
       content: "";
       position: absolute;
       inset: 0;
-      border-radius: 20px;
-      padding: 4px;
+      border-radius: 10px;
+      padding: 2px;
       background: $gradient;
-      -webkit-mask: linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
+      -webkit-mask: unquote('linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)');
       -webkit-mask-composite: xor;
       mask-composite: exclude;
     }
@@ -65,14 +64,14 @@ $gradients: map-merge(
 }
 
 @each $gradient, $value in $gradients {
-  @include bg-gradient(".bg-gradient-#{$gradient}", $value);
+  @include bg-gradient(".ws-bg-gradient-#{$gradient}", $value);
 }
 
 @each $gradient, $value in $gradients {
-  @include border-gradient(".border-gradient-#{$gradient}", $value);
+  @include border-gradient(".ws-border-gradient-#{$gradient}", $value);
 }
 
 @each $gradient, $value in $gradients {
-  $class: ".border-gradient-#{$gradient}-rounded";
+  $class: ".ws-border-gradient-#{$gradient}-rounded";
   @include border-gradient-rounded($class, $value);
 }

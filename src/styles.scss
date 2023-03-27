@@ -2,12 +2,13 @@
 @import "/src/styles/typography";
 @import "/src/styles/spacing";
 @import "/src/styles/layout";
+@import "/src/styles/buttonFormInput";
 
 body {
   background-color: $color-gray;
 }
 
-.background-container {
+.ws-background-container {
   position: relative;
 
   &::before {
@@ -21,4 +22,10 @@ body {
     background: linear-gradient(190deg, $color-dark 0%, $color-gray 75%);
     z-index: -1;
   }
+}
+
+.ws-main-layout {
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: 1fr auto;
 }

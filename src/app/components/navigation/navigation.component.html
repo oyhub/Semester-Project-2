@@ -1,6 +1,32 @@
-<div *ngIf="(screenWidthDetectionService.screenStatus | async) === false">
-  <div class="hamburger-container">
-    <div class="hamburger"></div>
+<div class="container">
+  <div *ngIf="!isMediumScreen" (click)="hamburgerClick()" class="hamburger">
+    <div class="burger" [class.active]="activeClass"></div>
   </div>
+
+  <nav *ngIf="!isMediumScreen" class="mobile-menu" [class.active]="activeClass">
+    <ul *ngIf="!isLoggedIn">
+      <li><button class="ws-reset-button--text-link ws-nav-link">Login</button></li>
+      <li><button class="ws-reset-button--text-link ws-nav-link">Register</button></li>
+    </ul>
+    <ul *ngIf="isLoggedIn">
+      <li><a href="#" class="ws-nav-link">Profile</a></li>
+      <li><a href="#" class="ws-nav-link">Create new listing</a></li>
+    </ul>
+  </nav>
+
+  <nav *ngIf="isMediumScreen" class="desktop-menu">
+    <ws-double-button
+      *ngIf="!isLoggedIn"
+      [leftText]="'Register'"
+      [rightText]="'Login'"
+      (leftClick)="onLeftClick()"
+      (rightClick)="onRightClick()">
+    </ws-double-button>
+
+    <ul *ngIf="isLoggedIn">
+      <li><a href="#" class="ws-nav-link">Profile</a></li>
+      <li><a href="#" class="ws-nav-link">Create new listing</a></li>
+    </ul>
+  </nav>
 </div>
-<p *ngIf="screenWidthDetectionService.screenStatus | async">big</p>
+

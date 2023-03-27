@@ -7,7 +7,6 @@ import { ScreenWidthDetectionService } from 'src/app/services/screen-width-detec
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  title: string = 'Hello';
   constructor(
     public screenWidthDetectionService: ScreenWidthDetectionService
   ) {}
