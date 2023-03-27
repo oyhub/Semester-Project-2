@@ -11,6 +11,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   activeClass: boolean = false;
   isLoggedIn: boolean = false;
   isMediumScreen: boolean;
+  isSmallScreen: boolean;
   private screenSubscription: Subscription;
 
   constructor(
@@ -26,7 +27,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
           this.activeClass = false;
         }
       })
-    ;
+
+    this.screenSubscription = this.screenWidthDetectionService.smallScreen.subscribe((status: boolean) => {
+      this.isSmallScreen = status;
+    });
   }
 
   ngOnDestroy() {

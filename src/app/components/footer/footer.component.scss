@@ -1,0 +1,23 @@
+@import "../../../styles";
+
+footer {
+  width: 100%;
+  background-color: $color-dark;
+  padding:1rem;
+
+}
+
+.footer-container {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  @media only screen and (min-width: $screen-md) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.footer-wrapper {
+  display: flex;
+  gap: 2rem;
+}

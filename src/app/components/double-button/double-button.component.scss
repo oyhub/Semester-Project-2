@@ -1,0 +1,42 @@
+@import "../../../styles";
+
+.button-container {
+  @extend .ws-bg-gradient-pink;
+  display: flex;
+  border-radius: 10px;
+}
+
+button {
+  background: transparent;
+  border: transparent;
+  padding: 0.75rem 1.75rem;
+  border: none;
+  border-radius: 10px;
+
+  &:first-child {
+    padding: 0.7rem 1.7rem;
+    margin: 0.175rem 0.175rem;
+    background: $color-dark;
+    color: $color-secondary;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+      color: $color-primary;
+      background-color: $color-gray;
+    }
+  }
+  &:nth-child(2) {
+    padding-left: 0.85rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    &:hover {
+      @extend .ws-bg-gradient-orange;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}

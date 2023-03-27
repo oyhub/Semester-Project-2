@@ -3,16 +3,7 @@
     <div class="burger" [class.active]="activeClass"></div>
   </div>
 
-  <nav *ngIf="!isMediumScreen" class="mobile-menu" [class.active]="activeClass">
-    <ul *ngIf="!isLoggedIn">
-      <li><button class="ws-reset-button--text-link ws-nav-link">Login</button></li>
-      <li><button class="ws-reset-button--text-link ws-nav-link">Register</button></li>
-    </ul>
-    <ul *ngIf="isLoggedIn">
-      <li><a href="#" class="ws-nav-link">Profile</a></li>
-      <li><a href="#" class="ws-nav-link">Create new listing</a></li>
-    </ul>
-  </nav>
+
 
   <nav *ngIf="isMediumScreen" class="desktop-menu">
     <ws-double-button
@@ -30,3 +21,15 @@
   </nav>
 </div>
 
+<nav *ngIf="!isMediumScreen" class="mobile-menu ws-bg-gradient-dark" [class.active]="activeClass">
+  <ul *ngIf="!isLoggedIn">
+    <li><button class="ws-reset-button--text-link ws-nav-link">Login</button></li>
+    <li><button class="ws-reset-button--text-link ws-nav-link">Register</button></li>
+  </ul>
+
+  <ul *ngIf="isLoggedIn">
+    <li><a href="#" class="ws-nav-link">Profile</a></li>
+    <li><a href="#" class="ws-nav-link">Create new listing</a></li>
+  </ul>
+</nav>
+<div class="mobile-menu-overlay" [class.active]="activeClass"></div>

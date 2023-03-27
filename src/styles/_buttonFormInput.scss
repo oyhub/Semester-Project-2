@@ -1,0 +1,39 @@
+.ws-btn {
+  @extend .ws-cta-text;
+  @extend .ws-bg-gradient-pink;
+  padding: 0.75rem 1.75rem;
+  border: none;
+  border-radius: 10px;
+
+  &:hover {
+  @extend .ws-bg-gradient-orange;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  &--secondary {
+    @extend .ws-border-gradient-pink-rounded;
+    background: $color-dark;
+    color: $color-secondary;
+
+    &:hover {
+      @extend .ws-border-gradient-orange-rounded;
+      background: $color-gray;
+      color: $color-primary;
+    }
+  }
+}
+
+.ws-reset-button {
+  background-color: transparent;
+  border: transparent;
+  cursor: pointer;
+
+  &--text-link {
+    @extend .ws-reset-button;
+    &:hover {
+    color: $color-tertiary;
+    text-decoration: underline;
+  }
+  }
+}
