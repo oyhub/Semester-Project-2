@@ -7,6 +7,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { ButtonComponent } from './components/button/button.component';
 import { DoubleButtonComponent } from './components/double-button/double-button.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { FooterComponent } from './components/footer/footer.component';
     NavigationComponent,
     ButtonComponent,
     DoubleButtonComponent,
-    FooterComponent
+    FooterComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule

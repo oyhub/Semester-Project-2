@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { ScreenWidthDetectionService } from 'src/app/services/screen-width-detection.service';
 import {Subscription} from "rxjs";
+import {ModalService} from "../../services/modal.service";
 
 @Component({
   selector: 'ws-navigation',
@@ -12,14 +13,17 @@ export class NavigationComponent implements OnInit, OnDestroy {
   isLoggedIn: boolean = false;
   isMediumScreen: boolean;
   isSmallScreen: boolean;
+  showModal: boolean = false
   private screenSubscription: Subscription;
 
   constructor(
-    public screenWidthDetectionService: ScreenWidthDetectionService
-  ) {}
+    public screenWidthDetectionService: ScreenWidthDetectionService,
+    private modalService: ModalService
+  ) {
+    this.modalService.showModal$.subscribe(show => this.showModal = show);
+  }
 
   ngOnInit() {
-
     this.screenSubscription =
       this.screenWidthDetectionService.mediumScreen.subscribe((status: boolean) => {
         this.isMediumScreen = status;
@@ -43,6 +47,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   onLeftClick() {
     console.log("Register")
+    this.modalService.openModal();
   }
 
   onRightClick() {
