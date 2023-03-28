@@ -1,13 +1,13 @@
-<div class="modal" (click)="clickOutside($event)">
-  <div class="modal-container">
-    <div class="modal-heading">
-      <img src="assets/images/logo.png" alt="">
-      <button class="ws-reset-button" (click)="close()">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-    </div>
-    <div class="modal-body">
-      <ng-content></ng-content>
-    </div>
+<div class="modal" (click)="close()">
+</div>
+<div class="modal-container">
+  <div class="modal-heading">
+    <img src="assets/images/logo.png" alt="">
+    <button class="ws-reset-button" (click)="close()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <ng-content></ng-content>
   </div>
 </div>

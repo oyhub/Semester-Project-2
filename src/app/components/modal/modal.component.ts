@@ -20,13 +20,4 @@ export class ModalComponent implements OnInit {
   close() {
     this.modalService.closeModal();
   }
-
-  clickOutside(event: MouseEvent) {
-    const targetElement = event.target as HTMLElement;
-    console.log(targetElement)
-    console.log(this.showModal)
-    if (this.showModal && targetElement && targetElement.classList.contains('modal')) {
-      this.modalService.closeModal();
-    }
-  }
 }
