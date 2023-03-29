@@ -10,8 +10,8 @@
       *ngIf="!isLoggedIn"
       [leftText]="'Register'"
       [rightText]="'Login'"
-      (leftClick)="onLeftClick()"
-      (rightClick)="onRightClick()">
+      (leftClick)="registerClick()"
+      (rightClick)="loginClick()">
     </ws-double-button>
 
     <ul *ngIf="isLoggedIn">
@@ -23,8 +23,8 @@
 
 <nav *ngIf="!isMediumScreen" class="mobile-menu ws-bg-gradient-dark" [class.active]="activeClass">
   <ul *ngIf="!isLoggedIn">
-    <li><button class="ws-reset-button--text-link ws-nav-link">Login</button></li>
-    <li><button class="ws-reset-button--text-link ws-nav-link">Register</button></li>
+    <li><button class="ws-reset-button--text-link ws-nav-link" (click)="loginClick()">Login</button></li>
+    <li><button class="ws-reset-button--text-link ws-nav-link" (click)="registerClick()">Register</button></li>
   </ul>
 
   <ul *ngIf="isLoggedIn">

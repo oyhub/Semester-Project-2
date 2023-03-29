@@ -1,12 +1,11 @@
 <div class="modal" (click)="close()">
 </div>
 <div class="modal-container">
-  <div class="modal-heading">
-    <img src="assets/images/logo.png" alt="">
-    <button class="ws-reset-button" (click)="close()">
+  <img *ngIf="isSmallScreen" src="../../../assets/images/logo-medium.png" alt="The wine seller logo" />
+  <img *ngIf="!isSmallScreen" src="../../../assets/images/logo.png" alt="The wine seller logo" />
+    <button id="modal-x" class="ws-reset-button" (click)="close()">
       <i class="fa-solid fa-xmark"></i>
     </button>
-  </div>
   <div class="modal-body">
     <ng-content></ng-content>
   </div>

@@ -13,6 +13,8 @@ export class NavigationComponent implements OnInit, OnDestroy {
   isLoggedIn: boolean = false;
   isMediumScreen: boolean;
   isSmallScreen: boolean;
+  loginModal: boolean = false;
+  registerModal: boolean = false;
   showModal: boolean = false
   private screenSubscription: Subscription;
 
@@ -20,10 +22,19 @@ export class NavigationComponent implements OnInit, OnDestroy {
     public screenWidthDetectionService: ScreenWidthDetectionService,
     private modalService: ModalService
   ) {
-    this.modalService.showModal$.subscribe(show => this.showModal = show);
+      this.modalService.showModal$.subscribe((show) => {
+      this.showModal = show
+      if (!this.showModal) {
+        this.loginModal = false;
+        this.registerModal = false;
+        console.log("false ff");
+      }
+    });
   }
 
-  ngOnInit() {
+
+
+  ngOnInit(): void {
     this.screenSubscription =
       this.screenWidthDetectionService.mediumScreen.subscribe((status: boolean) => {
         this.isMediumScreen = status;
@@ -45,12 +56,17 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.activeClass = this.activeClass ? this.activeClass = false : this.activeClass = true;
   }
 
-  onLeftClick() {
+  registerClick() {
+    this.registerModal = true;
+    this.activeClass = this.activeClass ? !this.activeClass : undefined;
     console.log("Register")
     this.modalService.openModal();
   }
 
-  onRightClick() {
+  loginClick() {
+    this.loginModal = true;
+    this.activeClass = this.activeClass ? !this.activeClass : undefined;
     console.log("Login")
+    this.modalService.openModal();
   }
 }

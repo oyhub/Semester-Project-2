@@ -1,10 +1,10 @@
 <header>
   <div class="logo">
     <h1>
-      <img *ngIf="screenWidthDetectionService.smallScreen | async" src="../../../assets/images/logo-medium.png" alt="The wine seller logo" />
-      <img *ngIf="(screenWidthDetectionService.smallScreen | async) === false" src="../../../assets/images/logo.png" alt="The wine seller logo" />
+      <img *ngIf="isSmallScreen" src="../../../assets/images/logo-medium.png" alt="The wine seller logo" />
+      <img *ngIf="!isSmallScreen" src="../../../assets/images/logo.png" alt="The wine seller logo" />
     </h1>
-    <p *ngIf="screenWidthDetectionService.mediumScreen | async" class="ws-h4">
+    <p *ngIf="isMediumScreen" class="ws-h4">
       Buy & sell Your wines online
     </p>
   </div>
