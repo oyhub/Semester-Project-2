@@ -34,4 +34,42 @@
 </nav>
 <div class="mobile-menu-overlay" [class.active]="activeClass"></div>
 
-<ws-modal *ngIf="showModal">Test content here</ws-modal>
+<ws-modal *ngIf="showModal">
+  <ng-container *ngTemplateOutlet="templateOutlet"></ng-container>
+</ws-modal>
+
+<ng-template #login>
+  <h2 class="ws-h3">Login</h2>
+  <form>
+    <div>
+      <label for="email">E-mail</label>
+      <input type="email" name="email" id="email">
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password">
+    </div>
+    <input type="submit" value="Login">
+  </form>
+  <button class="ws-reset-button">Not a user? Register here</button>
+</ng-template>
+
+<ng-template #register>
+  <h2>Register new user</h2>
+  <form>
+    <div>
+      <label for="email">E-mail</label>
+      <input type="email" name="email" id="reg-email">
+    </div>
+    <div>
+      <label for="username">Username</label>
+      <input type="text" name="username" id="username">
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="reg-password">
+    </div>
+    <input type="submit" value="Register">
+  </form>
+  <button class="ws-reset-button">Already a user? Login here</button>
+</ng-template>
