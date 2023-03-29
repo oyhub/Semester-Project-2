@@ -39,37 +39,37 @@
 </ws-modal>
 
 <ng-template #login>
-  <h2 class="ws-h3">Login</h2>
+  <h2 class="ws-h3 ws-mb-3">Login</h2>
   <form>
-    <div>
-      <label for="email">E-mail</label>
-      <input type="email" name="email" id="email">
+    <div class="ws-input">
+      <label class="ws-label-text--placeholder ws-input__label" for="email">E-mail</label>
+      <input class="ws-input__email" type="email" name="email" id="email">
     </div>
-    <div>
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password">
+    <div class="ws-input">
+      <label class="ws-label-text--placeholder ws-input__label" for="password">Password</label>
+      <input class="ws-input__password" type="password" name="password" id="password">
     </div>
-    <input type="submit" value="Login">
+    <button ws-button class="ws-my-5 ws-center-button-x" type="submit">Login</button>
   </form>
-  <button class="ws-reset-button">Not a user? Register here</button>
+  <button class="ws-reset-button ws-input-links ws-center-button-x">Not a user? Register here</button>
 </ng-template>
 
 <ng-template #register>
-  <h2>Register new user</h2>
+  <h2 class="ws-h3 ws-mb-3">Register new user</h2>
   <form>
-    <div>
-      <label for="email">E-mail</label>
-      <input type="email" name="email" id="reg-email">
+    <div class="ws-input">
+      <label class="ws-label-text--placeholder ws-input__label" for="email">E-mail</label>
+      <input class="ws-input__email" type="email" name="email" id="reg-email">
     </div>
-    <div>
-      <label for="username">Username</label>
-      <input type="text" name="username" id="username">
+    <div class="ws-input">
+      <label class="ws-label-text--placeholder ws-input__label" for="username">Username</label>
+      <input class="ws-input__text" type="text" name="username" id="username">
     </div>
-    <div>
-      <label for="password">Password</label>
-      <input type="password" name="password" id="reg-password">
+    <div class="ws-input">
+      <label class="ws-label-text--placeholder ws-input__label" for="password">Password</label>
+      <input class="ws-input__password" type="password" name="password" id="reg-password">
     </div>
-    <input type="submit" value="Register">
+    <button ws-button class="ws-my-5 ws-center-button-x" type="submit">Register</button>
   </form>
-  <button class="ws-reset-button">Already a user? Login here</button>
+  <button class="ws-reset-button ws-input-links ws-center-button-x">Already a user? Login here</button>
 </ng-template>

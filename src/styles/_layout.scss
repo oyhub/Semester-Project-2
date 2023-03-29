@@ -2,6 +2,10 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+
+  &:focus {
+    outline: $color-tertiary 2px dashed;
+  }
 }
 
 img {

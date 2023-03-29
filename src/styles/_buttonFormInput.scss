@@ -24,6 +24,12 @@
   }
 }
 
+.ws-center-button-x {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .ws-reset-button {
   background-color: transparent;
   border: transparent;
@@ -35,5 +41,36 @@
     color: $color-tertiary;
     text-decoration: underline;
   }
+  }
+}
+
+.ws-input {
+  width: 100%;
+  position: relative;
+
+  &__text,
+  &__email,
+  &__password {
+    width: 100%;
+    padding: 0.85rem;
+    background-color: $color-gray;
+    outline: transparent;
+    border: 0;
+    border-radius: 10px;
+    color: $color-netural;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+
+    &:focus {
+      outline: $color-primary 2px solid;
+    }
+  }
+
+  &__label {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    pointer-events: none;
   }
 }
