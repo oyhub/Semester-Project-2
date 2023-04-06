@@ -57,18 +57,41 @@
 <ng-template #register>
   <h2 class="ws-h3 ws-mb-3">Register new user</h2>
   <form>
-    <div class="ws-input">
-      <label class="ws-label-text--placeholder ws-input__label" for="email">E-mail</label>
-      <input class="ws-input__email" type="email" name="email" id="reg-email">
-    </div>
-    <div class="ws-input">
-      <label class="ws-label-text--placeholder ws-input__label" for="username">Username</label>
-      <input class="ws-input__text" type="text" name="username" id="username">
-    </div>
-    <div class="ws-input">
-      <label class="ws-label-text--placeholder ws-input__label" for="password">Password</label>
-      <input class="ws-input__password" type="password" name="password" id="reg-password">
-    </div>
+    <ws-input
+      class="ws-mb-1"
+      type="email"
+      label="E-mail"
+      name="email"
+      id="reg-email">
+    </ws-input>
+
+    <ws-input
+      class="ws-mb-1"
+      type="text"
+      label="Username"
+      name="username"
+      id="username">
+    </ws-input>
+
+    <ws-input
+      class="ws-mb-1"
+      type="password"
+      label="Password"
+      name="password"
+      id="reg-password">
+    </ws-input>
+<!--    <div class="ws-input">-->
+<!--      <label class="ws-label-text&#45;&#45;placeholder ws-input__label" for="email">E-mail</label>-->
+<!--      <input class="ws-input__email" type="email" name="email" id="reg-email">-->
+<!--    </div>-->
+<!--    <div class="ws-input">-->
+<!--      <label class="ws-label-text&#45;&#45;placeholder ws-input__label" for="username">Username</label>-->
+<!--      <input class="ws-input__text" type="text" name="username" id="username">-->
+<!--    </div>-->
+<!--    <div class="ws-input">-->
+<!--      <label class="ws-label-text&#45;&#45;placeholder ws-input__label" for="password">Password</label>-->
+<!--      <input class="ws-input__password" type="password" name="password" id="reg-password">-->
+<!--    </div>-->
     <button ws-button class="ws-my-5 ws-center-button-x" type="submit">Register</button>
   </form>
   <button class="ws-reset-button ws-input-links ws-center-button-x">Already a user? Login here</button>

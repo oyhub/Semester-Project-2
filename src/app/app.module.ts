@@ -8,6 +8,8 @@ import { ButtonComponent } from './components/button/button.component';
 import { DoubleButtonComponent } from './components/double-button/double-button.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { InputComponent } from './components/inputs/input.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -18,9 +20,11 @@ import { ModalComponent } from './components/modal/modal.component';
     DoubleButtonComponent,
     FooterComponent,
     ModalComponent,
+    InputComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
