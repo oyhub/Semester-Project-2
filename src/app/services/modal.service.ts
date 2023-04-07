@@ -17,6 +17,5 @@ export class ModalService {
 
   closeModal() {
     this.showModalSubject.next(false);
-    console.log("close modal")
   }
 }

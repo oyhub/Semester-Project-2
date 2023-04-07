@@ -4,10 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class Constants {
-  public readonly BASE_URL = 'https://winebase.up.railway.app/api/';
-  public readonly URL_AUTH = 'auth/local/';
-  public readonly WINES_URL = 'wines/';
-  public readonly ALL_DATA = '?populate=*';
+  public readonly BASE_URL = 'https://api.noroff.dev/api/v1/auction/';
+  public readonly REGISTER_URL = 'auth/register/';
+  public readonly LOGIN_URL = 'auth/login/';
 
   public readonly TOKEN_KEY = 'token';
   public readonly USER_KEY = 'user';
