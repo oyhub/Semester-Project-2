@@ -11,6 +11,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { InputComponent } from './components/inputs/input.component';
 import {FormsModule} from "@angular/forms";
+import { ListingsComponent } from './pages/listings/listings.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {FormsModule} from "@angular/forms";
     DoubleButtonComponent,
     FooterComponent,
     ModalComponent,
-    InputComponent
+    InputComponent,
+    ListingsComponent
   ],
   imports: [
     BrowserModule,

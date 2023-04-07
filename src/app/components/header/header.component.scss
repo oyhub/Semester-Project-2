@@ -1,6 +1,12 @@
+@import "src/styles";
+
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 2rem;
+  align-items: baseline;
+}
+
+ws-navigation {
+  justify-self: end;
 }

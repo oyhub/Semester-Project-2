@@ -35,7 +35,8 @@ export class InputComponent implements OnInit {
     this.active = this.inputValue ? true : false;
   }
 
-  toggleEye() {
+  toggleEye(event: MouseEvent) {
+    event.preventDefault();
     this.activeEye = !this.activeEye;
     if (this.activeEye) {
       this.type = "text";

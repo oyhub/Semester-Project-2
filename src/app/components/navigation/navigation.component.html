@@ -17,6 +17,7 @@
     <ul *ngIf="isLoggedIn">
       <li><a href="#" class="ws-nav-link">Profile</a></li>
       <li><a href="#" class="ws-nav-link">Create new listing</a></li>
+      <li><button ws-button variant="SECONDARY" (click)="logoutClick()">Logout</button></li>
     </ul>
   </nav>
 </div>
@@ -30,6 +31,7 @@
   <ul *ngIf="isLoggedIn">
     <li><a href="#" class="ws-nav-link">Profile</a></li>
     <li><a href="#" class="ws-nav-link">Create new listing</a></li>
+    <li><button class="ws-reset-button ws-nav-link" (click)="logoutClick()">Logout</button></li>
   </ul>
 </nav>
 <div class="mobile-menu-overlay" [class.active]="activeClass"></div>
@@ -62,6 +64,14 @@
     <button ws-button class="ws-my-5 ws-center-button-x" type="submit">Login</button>
   </form>
   <button class="ws-reset-button ws-input-links ws-center-button-x">Not a user? Register here</button>
+</ng-template>
+
+<ng-template #logout>
+  <h2 class="ws-h3 ws-mb-3 logout-text">Are you sure you want to logout?</h2>
+  <div class="logout-buttons">
+    <button ws-button variant="SECONDARY" (click)="this.modalService.closeModal()">Cancel</button>
+    <button ws-button (click)="onLogout()">Logout</button>
+  </div>
 </ng-template>
 
 <ng-template #register>

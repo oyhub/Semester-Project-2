@@ -27,6 +27,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   private userSubscription: Subscription;
 
   @ViewChild('login', { static: true }) loginTemplate;
+  @ViewChild('logout', { static: true }) logoutTemplate;
   @ViewChild('register', { static: true }) registerTemplate;
   @ViewChild('emailInput') email: InputComponent;
   @ViewChild('passwordInput') password: InputComponent;
@@ -37,7 +38,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   constructor(
     public screenWidthDetectionService: ScreenWidthDetectionService,
-    private modalService: ModalService,
+    public modalService: ModalService,
     private dataService: DataService,
     private storageService: StorageService,
     private userService: UserService
@@ -117,6 +118,19 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
     this.dataService.register(register);
   }
+
+  logoutClick() {
+    this.templateOutlet = this.logoutTemplate;
+    this.activeClass = this.activeClass ? !this.activeClass : undefined;
+    this.modalService.openModal();
+  }
+
+  onLogout() {
+    this.storageService.clearAllStorage();
+    this.userService.checkIfUserExist();
+    this.modalService.closeModal()
+  }
+
 }
 
 

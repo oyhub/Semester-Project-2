@@ -3,7 +3,7 @@
     {{label}}
   </label>
   <input class="ws-input__{{type}}" type="{{type}}" name="{{name}}" [id]="id" [(ngModel)]="inputValue"  (focus)="onFocus()" (blur)="onBlur()">
-  <button *ngIf="showEye" class="password-eye ws-reset-button" (click)="toggleEye()">
+  <button *ngIf="showEye" class="password-eye ws-reset-button" (click)="toggleEye($event)">
     <i class="fa-regular" [ngClass]="{'fa-eye-slash' : activeEye, 'fa-eye' : !activeEye}"></i>
   </button>
 </div>

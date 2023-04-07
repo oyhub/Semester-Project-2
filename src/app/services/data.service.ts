@@ -7,6 +7,7 @@ import { retry } from 'rxjs/operators';
 import {ModalService} from "./modal.service";
 import {UserService} from "./user.service";
 import {Register} from "../models/register.model";
+import {Observable} from "rxjs";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -20,6 +21,7 @@ const httpOptions = {
 export class DataService {
   loginUrl: string;
   registerUrl: string;
+  listingsUrl: string;
   showModal: boolean;
 
   constructor(
@@ -31,6 +33,7 @@ export class DataService {
   ) {
     this.loginUrl = constants.BASE_URL + constants.LOGIN_URL;
     this.registerUrl = constants.BASE_URL + constants.REGISTER_URL;
+    this.listingsUrl = constants.BASE_URL + constants.LISTINGS_URL;
     this.modalService.showModal$.subscribe(show => this.showModal = show);
   }
 
@@ -71,5 +74,9 @@ export class DataService {
           this.modalService.closeModal();
         }
       });
+  }
+
+  getListings(): Observable<any> {
+    return this.http.get(this.listingsUrl, httpOptions).pipe(retry(2));
   }
 }

@@ -113,3 +113,13 @@
     transform: translateX(0);
   }
 }
+
+.logout-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.logout-text {
+  text-align: center;
+}

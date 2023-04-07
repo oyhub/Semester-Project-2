@@ -39,4 +39,8 @@ export class StorageService {
   public clearStorage(key: string): void {
     localStorage.removeItem(key);
   }
+
+  public clearAllStorage():void {
+    localStorage.clear();
+  }
 }
