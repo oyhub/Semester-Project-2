@@ -7,6 +7,7 @@ import {Login} from "../../models/login.model";
 import {DataService} from "../../services/data.service";
 import {StorageService} from "../../services/storage.service";
 import {UserService} from "../../services/user.service";
+import {Register} from "../../models/register.model";
 
 @Component({
   selector: 'ws-navigation',
@@ -29,6 +30,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
   @ViewChild('register', { static: true }) registerTemplate;
   @ViewChild('emailInput') email: InputComponent;
   @ViewChild('passwordInput') password: InputComponent;
+  @ViewChild('regEmailInput') regEmail: InputComponent;
+  @ViewChild('regPasswordInput') regPassword: InputComponent;
+  @ViewChild('regUsernameInput') regUsername: InputComponent;
 
 
   constructor(
@@ -86,7 +90,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   onLogin() {
-    console.log(this.storageService.getUser());
     if (!this.email.inputValue || !this.password.inputValue) {
       alert('Please write login details');
       return;
@@ -94,11 +97,26 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
     const login: Login = {
       email: this.email.inputValue.trim(),
-      password: this.password.inputValue.trim(),
+      password: this.password.inputValue.trim()
     };
 
    this.dataService.getAuth(login);
+  }
 
-   console.log(this.storageService.getUser());
+  onRegister() {
+    if (!this.regEmail.inputValue || !this.regPassword.inputValue || !this.regUsername.inputValue) {
+      alert('Please write in register details');
+      return;
+    }
+
+    const register: Register = {
+      name: this.regUsername.inputValue.trim(),
+      email: this.regEmail.inputValue.trim(),
+      password: this.regPassword.inputValue.trim()
+    }
+
+    this.dataService.register(register);
   }
 }
+
+

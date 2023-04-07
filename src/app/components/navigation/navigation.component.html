@@ -66,13 +66,14 @@
 
 <ng-template #register>
   <h2 class="ws-h3 ws-mb-3">Register new user</h2>
-  <form>
+  <form (ngSubmit)="onRegister()">
     <ws-input
       class="ws-mb-1"
       type="email"
       label="E-mail"
       name="email"
-      id="reg-email">
+      id="reg-email"
+      #regEmailInput>
     </ws-input>
 
     <ws-input
@@ -80,7 +81,8 @@
       type="text"
       label="Username"
       name="username"
-      id="username">
+      id="username"
+      #regUsernameInput>
     </ws-input>
 
     <ws-input
@@ -88,7 +90,8 @@
       type="password"
       label="Password"
       name="password"
-      id="reg-password">
+      id="reg-password"
+      #regPasswordInput>
     </ws-input>
 
     <button ws-button class="ws-my-5 ws-center-button-x" type="submit">Register</button>
