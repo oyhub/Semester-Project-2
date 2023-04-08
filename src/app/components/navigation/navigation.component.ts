@@ -90,7 +90,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.modalService.openModal();
   }
 
-  onLogin() {
+  onLogin(event) {
+    event.preventDefault();
+
     if (!this.email.inputValue || !this.password.inputValue) {
       alert('Please write login details');
       return;

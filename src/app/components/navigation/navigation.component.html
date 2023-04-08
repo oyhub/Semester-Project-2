@@ -42,7 +42,7 @@
 
 <ng-template #login>
   <h2 class="ws-h3 ws-mb-3">Login</h2>
-  <form (ngSubmit)="onLogin()">
+  <form (ngSubmit)="onLogin($event)">
     <ws-input
       class="ws-mb-1"
       type="email"
@@ -58,6 +58,7 @@
       label="Password"
       name="password"
       id="password"
+      (keydown.enter)="onLogin($event)"
       #passwordInput>
     </ws-input>
 
