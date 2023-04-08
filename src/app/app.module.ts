@@ -12,6 +12,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { InputComponent } from './components/inputs/input.component';
 import {FormsModule} from "@angular/forms";
 import { ListingsComponent } from './pages/listings/listings.component';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ListingsComponent } from './pages/listings/listings.component';
     FooterComponent,
     ModalComponent,
     InputComponent,
-    ListingsComponent
+    ListingsComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,

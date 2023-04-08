@@ -22,6 +22,7 @@ export class DataService {
   loginUrl: string;
   registerUrl: string;
   listingsUrl: string;
+  listingsLimit: number;
   showModal: boolean;
 
   constructor(
@@ -34,6 +35,7 @@ export class DataService {
     this.loginUrl = constants.BASE_URL + constants.LOGIN_URL;
     this.registerUrl = constants.BASE_URL + constants.REGISTER_URL;
     this.listingsUrl = constants.BASE_URL + constants.LISTINGS_URL;
+    this.listingsLimit = constants.LISTINGS_LIMIT;
     this.modalService.showModal$.subscribe(show => this.showModal = show);
   }
 
@@ -76,7 +78,8 @@ export class DataService {
       });
   }
 
-  getListings(): Observable<any> {
-    return this.http.get(this.listingsUrl, httpOptions).pipe(retry(2));
+  getListings(offset: number = 0): Observable<any> {
+    const listingsUrl = `${this.listingsUrl}&limit=${this.listingsLimit}&offset=${offset}`;
+    return this.http.get(listingsUrl, httpOptions).pipe(retry(2));
   }
 }

@@ -1,0 +1,24 @@
+<div class="background">
+  <div class="image-container">
+    <img src="{{image}}" alt="" [class.placeholder]="placeholderImage" (error)="imageLoadError()">
+  </div>
+  <div class="wrapper">
+    <h3 class="ws-my-2 title ws-card-heading">{{title}}</h3>
+    <div class="timeleft ws-mb-2 ws-card-time-left">
+      <i class="fa-solid fa-clock"></i>
+      <span>{{endTime}}</span>
+    </div>
+    <p class="description ws-mb-2 ws-px-1">
+      {{description}}
+    </p>
+    <p class="highBid ws-mb-2 ws-card-bids">
+      <ng-container *ngIf="highBid">
+        Highest bid:
+        <span class="bid ws-card-bids--highbid ws-ml-2">${{highBid}}</span>
+      </ng-container>
+      <ng-container *ngIf="!highBid">
+        No bids
+      </ng-container>
+    </p>
+  </div>
+</div>

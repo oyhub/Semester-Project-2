@@ -130,3 +130,32 @@ a {
     color: $color-tertiary;
   }
 }
+
+.ws-card-heading {
+  font-family: $font-heading;
+  font-weight: 300;
+  font-size: 1.3rem;
+}
+
+.ws-card-time-left {
+  font-family: $font-heading;
+  font-weight: 200;
+  font-size: 0.875rem;
+
+  &--orange {
+    @extend .ws-card-time-left;
+    color: $color-primary;
+  }
+}
+
+.ws-card-bids {
+  font-family: $font-heading;
+  font-weight: 300;
+  font-size: 1rem;
+
+  &--highbid {
+    @extend .ws-card-bids;
+    font-size: 1.3rem;
+    color: $color-primary;
+  }
+}

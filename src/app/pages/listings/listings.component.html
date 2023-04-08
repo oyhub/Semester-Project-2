@@ -1,3 +1,6 @@
-<ul>
-  <li *ngFor="let listing of listings">{{listing.title}}</li>
-</ul>
+<div class="container ws-mb-4">
+  <ng-container *ngFor="let listing of listings">
+    <ws-card [item]="listing"></ws-card>
+  </ng-container>
+</div>
+<button *ngIf="moreToLoad" ws-button class="ws-mb-4" (click)="loadMore()">Load More</button>
