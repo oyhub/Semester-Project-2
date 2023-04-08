@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from "@angular/common/http";
+import { RouterModule, Routes } from '@angular/router';
+
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -13,6 +15,16 @@ import { InputComponent } from './components/inputs/input.component';
 import {FormsModule} from "@angular/forms";
 import { ListingsComponent } from './pages/listings/listings.component';
 import { CardComponent } from './components/card/card.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { CreateNewComponent } from './pages/create-new/create-new.component';
+import { WineComponent } from './pages/wine/wine.component';
+
+const routes: Routes = [
+  { path: '', component: ListingsComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'create-new', component: CreateNewComponent },
+  { path: 'wine', component: WineComponent },
+];
 
 @NgModule({
   declarations: [
@@ -25,13 +37,18 @@ import { CardComponent } from './components/card/card.component';
     ModalComponent,
     InputComponent,
     ListingsComponent,
-    CardComponent
+    CardComponent,
+    ProfileComponent,
+    CreateNewComponent,
+    WineComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(routes)
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })

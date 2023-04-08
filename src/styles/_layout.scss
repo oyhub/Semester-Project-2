@@ -5,6 +5,7 @@
 
   &:focus {
     outline: $color-tertiary 2px dashed;
+    outline-offset: 4px;
   }
 }
 

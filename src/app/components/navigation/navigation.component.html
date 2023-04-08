@@ -15,8 +15,8 @@
     </ws-double-button>
 
     <ul *ngIf="isLoggedIn">
-      <li><a href="#" class="ws-nav-link">Profile</a></li>
-      <li><a href="#" class="ws-nav-link">Create new listing</a></li>
+      <li><a routerLink="/profile" class="ws-nav-link">Profile</a></li>
+      <li><a routerLink="/create-new" class="ws-nav-link">Create new listing</a></li>
       <li><button ws-button variant="SECONDARY" (click)="logoutClick()">Logout</button></li>
     </ul>
   </nav>
@@ -29,8 +29,8 @@
   </ul>
 
   <ul *ngIf="isLoggedIn">
-    <li><a href="#" class="ws-nav-link">Profile</a></li>
-    <li><a href="#" class="ws-nav-link">Create new listing</a></li>
+    <li><a routerLink="/profile" class="ws-nav-link">Profile</a></li>
+    <li><a routerLink="/create-new" class="ws-nav-link">Create new listing</a></li>
     <li><button class="ws-reset-button ws-nav-link" (click)="logoutClick()">Logout</button></li>
   </ul>
 </nav>
