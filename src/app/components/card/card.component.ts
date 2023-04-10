@@ -19,9 +19,9 @@ export class CardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.title = this.item.title;
+    this.title = this.formatTitle(this.item.title);
     this.image = this.item.media[0];
-    this.endTime = this.getReminingTime(this.item.endsAt);
+    this.endTime = this.getRemainingTime(this.item.endsAt);
     this.highBid = this.item.bids?.slice(-1)[0]?.amount;
     this.description = this.item.description;
 
@@ -35,7 +35,7 @@ export class CardComponent implements OnInit {
     this.image = "assets/images/wine-bottle-placeholder.jpg"
   }
 
-  getReminingTime(endDate: string): string {
+  getRemainingTime(endDate: string): string {
    const now = new Date();
    const end = new Date(endDate);
    const days = differenceInDays(end, now);
@@ -66,5 +66,18 @@ export class CardComponent implements OnInit {
       default:
         return 'Auction ended';
     }
+  }
+
+  formatTitle(string: string): string {
+    if (this.hasMixedCase(string)) {
+      return string;
+    } else {
+      return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+
+    }
+  }
+
+  hasMixedCase(string: string): boolean {
+    return /[a-z]/.test(string) && /[A-Z]/.test(string);
   }
 }

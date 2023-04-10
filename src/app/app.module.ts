@@ -17,13 +17,13 @@ import { ListingsComponent } from './pages/listings/listings.component';
 import { CardComponent } from './components/card/card.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CreateNewComponent } from './pages/create-new/create-new.component';
-import { WineComponent } from './pages/wine/wine.component';
+import { ListingComponent } from './pages/listing/listing.component';
 
 const routes: Routes = [
   { path: '', component: ListingsComponent },
+  { path: 'listing/:id', component: ListingComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'create-new', component: CreateNewComponent },
-  { path: 'wine', component: WineComponent },
 ];
 
 @NgModule({
@@ -40,7 +40,7 @@ const routes: Routes = [
     CardComponent,
     ProfileComponent,
     CreateNewComponent,
-    WineComponent
+    ListingComponent
   ],
   imports: [
     BrowserModule,

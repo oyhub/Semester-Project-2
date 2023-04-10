@@ -1,0 +1,122 @@
+@import "../../../styles";
+
+.header {
+  border-bottom: 2px solid $color-primary;
+  display: flex;
+  justify-content: space-between;
+}
+
+.placeholder {
+  filter: opacity(0.7) grayscale(0.2);
+}
+
+.bid-input,
+.bid-input:active {
+  font-family: $font-paragraph;
+  font-weight: 200;
+  font-size: 1rem;
+  width: 6rem;
+  padding-left: 1.7rem;
+  margin: 0;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+
+  &:focus {
+    outline: $color-tertiary 2px dashed;
+    outline-offset: 8px;
+  }
+}
+
+.bid-btn {
+  @extend .ws-bg-gradient-pink;
+  @extend .ws-cta-text;
+  padding: 1rem 2.5rem;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+
+  &:hover,
+  &:focus-within{
+    @extend .ws-bg-gradient-orange;
+  }
+}
+
+.bid-currency {
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.bid-container {
+  display: inline-block;
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: -2px;
+    @extend .ws-border-gradient-pink-rounded;
+    z-index: -1;
+  }
+
+  &:focus-within:before {
+    @extend .ws-border-gradient-orange-rounded;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: -2px;
+  }
+}
+
+.info-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4rem
+}
+
+.image-container {
+  aspect-ratio: 1/ 1;
+  background-color: $color-dark-gray;
+
+  & img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    object-position: center;
+    &.placeholder {
+      filter: opacity(0.7) grayscale(0.2);
+    }
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+
+  @media only screen and (min-width: $screen-md) {
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(18rem, 1fr) );
+
+  }
+}
+
+.category-icon {
+  display: none;
+  @extend .ws-bg-gradient-pink;
+  border-radius: 6px;
+  color: $color-dark;
+  font-weight: 500;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.6rem;
+  text-transform: uppercase;
+  align-self: end;
+  margin-bottom: 0.5rem;
+  @media only screen and (min-width: $screen-md) {
+    display: block;
+  }
+}

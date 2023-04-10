@@ -1,6 +1,8 @@
 <div class="container ws-mb-4">
   <ng-container *ngFor="let listing of listings">
-    <ws-card [item]="listing"></ws-card>
+    <a class="link-unset" [routerLink]="['/listing', listing.id]">
+      <ws-card [item]="listing"></ws-card>
+    </a>
   </ng-container>
 </div>
 <button *ngIf="moreToLoad" ws-button class="ws-mb-4" (click)="loadMore()">Load More</button>

@@ -1,0 +1,52 @@
+<ng-container *ngIf="this.listing">
+  <div class="header ws-mb-6">
+    <h1>{{title}}</h1>
+    <div class="category-icon">
+      Category
+    </div>
+  </div>
+
+  <div class="body ws-mb-7">
+    <div class="image-container ws-mb-5">
+      <img src="{{image}}" alt="" [class.placeholder]="placeholderImage" (error)="imageLoadError()">
+    </div>
+
+    <div class="body-container">
+      <h2 class="ws-h3 ws-mb-2">Bid on this item</h2>
+      <p *ngIf="noBidPlaced" class="ws-mb-2">Be the first to bid on this item</p>
+      <form class="ws-mb-2">
+        <div class="bid-container">
+          <span class="bid-currency">$</span>
+          <input class="bid-input ws-input__text" type="tel" name="" id="" value="{{bidValue}}" (focus)="resetValue($event)">
+          <button class="bid-btn ws-reset-button" type="submit">Bid</button>
+        </div>
+      </form>
+      <p class="ws-mb-6 ws-bold">You have <span>||coins|| </span>left</p>
+
+      <h2 class="ws-mb-2">Description</h2>
+      <p class="ws-mb-6">{{listing.description}}</p>
+
+      <div class="info-wrapper">
+        <div class="info">
+          <h2 class="ws-mb-2">Information</h2>
+          <ul>
+            <li><span class="ws-bold">Highest bid: </span>$ {{highBid}}</li>
+            <li><span class="ws-bold">Category: </span> ||category||</li>
+            <li><span class="ws-bold">Ends at: </span>{{endDate}} - {{timeLeft}}</li>
+            <li><span class="ws-bold">Added by: </span>{{seller}}</li>
+          </ul>
+        </div>
+        <div class="history">
+          <h2 class="ws-mb-2">Latest bid</h2>
+          <ul>
+            <li><span class="bold">No bidding history</span></li>
+            <li>
+              <span>User - username</span>
+              <span>date date </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
