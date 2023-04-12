@@ -23,6 +23,7 @@ export class DataService {
   registerUrl: string;
   listingsUrl: string;
   specificUrl: string;
+  profileUrl: string;
   listingsLimit: number;
   showModal: boolean;
 
@@ -37,6 +38,7 @@ export class DataService {
     this.registerUrl = constants.BASE_URL + constants.REGISTER_URL;
     this.listingsUrl = constants.BASE_URL + constants.LISTINGS_URL + constants.LISTING_OPTIONS;
     this.specificUrl = constants.BASE_URL + constants.LISTINGS_URL;
+    this.profileUrl = constants.BASE_URL + constants.PROFILE_URL;
     this.listingsLimit = constants.LISTINGS_LIMIT;
 
     this.modalService.showModal$.subscribe(show => this.showModal = show);
@@ -89,6 +91,13 @@ export class DataService {
   getSpecificListing(id: string): Observable<any> {
     const listingUrl = `${this.specificUrl}/${id}${this.constants.SPECIFIC_OPTIONS}`;
     return this.http.get(listingUrl, httpOptions).pipe(retry(2));
+  }
 
+  getUserProfile(): Observable<any> {
+    const name = this.storageService.getUser()
+    const token = this.storageService.getToken()
+    const profileURL = this.profileUrl + '/' + name;
+    httpOptions.headers = httpOptions.headers.append('Authorization', `Bearer ${token}`);
+    return this.http.get(profileURL, httpOptions).pipe(retry(2));
   }
 }

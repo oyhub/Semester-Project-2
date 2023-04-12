@@ -10,6 +10,7 @@ export class Constants {
   public readonly LISTINGS_URL = '/listings'
   public readonly LISTING_OPTIONS = '?_bids=true&_active=true';
   public readonly SPECIFIC_OPTIONS = '?_bids=true&_seller=true';
+  public readonly PROFILE_URL = '/profiles'
   public readonly LISTINGS_LIMIT = 10;
 
 
