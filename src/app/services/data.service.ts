@@ -9,7 +9,7 @@ import {UserService} from "./user.service";
 import {Register} from "../models/register.model";
 import {Observable} from "rxjs";
 
-const httpOptions = {
+let httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
   }),
@@ -97,7 +97,41 @@ export class DataService {
     const name = this.storageService.getUser()
     const token = this.storageService.getToken()
     const profileURL = this.profileUrl + '/' + name;
-    httpOptions.headers = httpOptions.headers.append('Authorization', `Bearer ${token}`);
+
+    httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }),
+    };
     return this.http.get(profileURL, httpOptions).pipe(retry(2));
+  }
+
+  getUsersListings(): Observable<any> {
+    const name = this.storageService.getUser()
+    const token = this.storageService.getToken()
+    const userListingUrl = this.profileUrl + '/' + name + '/listings?_bids=true';
+
+    httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }),
+    };
+    return this.http.get(userListingUrl, httpOptions).pipe(retry(2));
+  }
+
+  getUsersBids(): Observable<any> {
+    const name = this.storageService.getUser()
+    const token = this.storageService.getToken()
+    const userBidUrl = this.profileUrl + '/' + name + '/bids?_listings=true'
+
+    httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }),
+    };
+    return this.http.get(userBidUrl, httpOptions).pipe(retry(2));
   }
 }
