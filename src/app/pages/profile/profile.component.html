@@ -31,10 +31,10 @@
       <h2 class="ws-mb-4">Your wins</h2>
       <ng-container *ngIf="wins else noWins">
         <div *ngFor="let win of wins" class="win ws-mb-5 ws-pb-2">
-          <h3 class="ws-mb-1">||title||</h3>
-          <p class="ws-mb-1">Amount of bids: ||bids||</p>
-          <p class="ws-mb-2">Corrent price: $||price||</p>
-          <a [routerLink]="['/listing', win.id]" class="ws-listing-link">See Listing</a>
+          <h3 class="ws-mb-1">{{win.listing.title}}</h3>
+          <p class="ws-mb-1">Amount of bids: {{win.amountOfBids}}</p>
+          <p class="ws-mb-2">Winning price: ${{win.amount}}</p>
+          <a [routerLink]="['/listing', win.listing.id]" class="ws-listing-link">See Listing</a>
         </div>
       </ng-container>
     </div>

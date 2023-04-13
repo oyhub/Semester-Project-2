@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {DataService} from "../../services/data.service";
-import {forkJoin} from "rxjs";
+import {forkJoin, map, Observable, of} from "rxjs";
 
 @Component({
   selector: 'ws-profile-page',
@@ -26,11 +26,13 @@ export class ProfileComponent implements OnInit {
       this.dataService.getUsersBids()
     ]).subscribe({
       next: ([userProfile, userListings, userBids]: [any, any, any]) => {
-        console.log(userProfile);
-        console.log(userListings);
-        console.log(userBids);
         this.listings = userListings;
+
         this.buildData(userProfile)
+        this.buildWins(userProfile, userBids).subscribe({
+          next: (wins) => { this.wins = wins },
+          error: (error: any) => { console.log(error);}
+        });
       },
       error: (error: any) => {
         console.log(error);
@@ -52,4 +54,23 @@ export class ProfileComponent implements OnInit {
     this.credits = profile.credits;
   }
 
+  buildWins(profile, bids): Observable<any[]> {
+    if (!profile.wins) {
+      return of([]);
+    }
+
+    const winObservables = profile.wins.map(win => {
+      return bids
+        .filter(bid => win === bid.listing.id)
+        .map(bid => {
+          return this.dataService.getSpecificListing(bid.listing.id).pipe(
+            map(thisBid => {
+              return { ...bid, amountOfBids: thisBid.bids.length };
+            })
+          );
+        });
+    }).flat();
+
+    return forkJoin(winObservables) as Observable<any[]>;
+  }
 }
