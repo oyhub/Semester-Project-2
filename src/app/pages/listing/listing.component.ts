@@ -23,6 +23,7 @@ export class ListingComponent implements OnInit {
   timeLeft: string;
   seller: string;
   creditsLeft: number;
+  ended: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private dataService: DataService) { }
@@ -34,6 +35,7 @@ export class ListingComponent implements OnInit {
         this.listing = response
         this.buildData();
         console.log(response)
+        this.ended = new Date() > new Date(response.endsAt)
       },
       error: (error: any) => {
         console.log(error);
@@ -43,7 +45,6 @@ export class ListingComponent implements OnInit {
     this.dataService.getUserProfile().subscribe({
       next: (response: any) => {
         this.addCoins(response)
-        console.log(response)
       },
       error: (error: any) => {
         console.log(error)
