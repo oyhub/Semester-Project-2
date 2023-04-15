@@ -1,8 +1,26 @@
 <div class="ws-input {{class}}">
-  <label class="ws-label-text--placeholder ws-input__label" [class.active]="active" [class.focused]="focused" for="{{id}}">
+  <label
+    class="ws-label-text--placeholder ws-input__label"
+    [class.label-top]="type === 'textarea'"
+    [class.active]="active"
+    [class.focused]="focused"
+    for="{{id}}">
     {{label}}
   </label>
-  <input class="ws-input__{{type}}" type="{{type}}" name="{{name}}" [id]="id" [(ngModel)]="inputValue"  (focus)="onFocus()" (blur)="onBlur()">
+  <input
+    *ngIf="type !== 'textarea'"
+    class="ws-input__{{type}}"
+    name="{{name}}"
+    type="{{type}}"
+    [class.border]="showBorder"
+    [id]="id" [(ngModel)]="inputValue"
+    (focus)="onFocus()"
+    (blur)="onBlur()">
+  <textarea
+    *ngIf="type === 'textarea'"
+    class="ws-input__{{type}} border"
+    (focus)="onFocus()"
+    (blur)="onBlur()"></textarea>
   <button *ngIf="showEye" class="password-eye ws-reset-button" (click)="toggleEye($event)">
     <i class="fa-regular" [ngClass]="{'fa-eye-slash' : activeEye, 'fa-eye' : !activeEye}"></i>
   </button>

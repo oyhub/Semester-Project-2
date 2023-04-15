@@ -1,1 +1,75 @@
-<p>create-new works!</p>
+<h1 class="ws-mb-6">Create new listing</h1>
+
+<div class="body ws-mb-6">
+  <form>
+    <div class="grid-wrapper">
+      <div class="flex-col title-col">
+        <ws-input
+          class="ws-mb-1 title"
+          type="text"
+          label="Title"
+          name="title"
+          id="title"
+          [showBorder]="true"
+          #titleInput>
+        </ws-input>
+
+        <ws-input
+          class="ws-mb-1"
+          type="text"
+          label="Category"
+          name="category"
+          id="category"
+          [showBorder]="true"
+          #categoryInput>
+        </ws-input>
+      </div>
+      <div class="flex-col">
+          <div class="date">
+            <div class="date__col date-wrapper">
+              <label>End date</label>
+              <input class="date__date" type="date">
+              <i class="date__icon--calendar fa-solid fa-calendar"></i>
+            </div>
+            <div class="date__row">
+              <div class="date__col">
+                <label>Hour</label>
+                <input class="date__time" type="text">
+              </div>
+              <div class="date__col">
+                <label>Min</label>
+                <input class="date__time" type="text">
+              </div>
+            </div>
+          </div>
+
+
+        <ws-input
+          class="ws-mb-1"
+          type="text"
+          label="Photo url"
+          name="photo"
+          id="photo"
+          [showBorder]="true"
+          #photoInput>
+        </ws-input>
+      </div>
+    </div>
+
+    <div class="grid-wrapper">
+      <div class="flex-col">
+        <ws-input
+          class="ws-mb-1"
+          type="textarea"
+          label="Description"
+          name="description"
+          id="description"
+          [showBorder]="true"
+          #descriptionInput>
+        </ws-input>
+      </div>
+
+      <button ws-button type="submit" class="btn ws-center-button-x">Save & publish</button>
+    </div>
+  </form>
+</div>

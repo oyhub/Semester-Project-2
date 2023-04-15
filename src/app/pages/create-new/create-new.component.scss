@@ -1,0 +1,99 @@
+@import "../../../styles";
+
+h1 {
+border-bottom: 2px solid $color-primary;
+}
+
+.grid-wrapper {
+  @media only screen and (min-width: $screen-md) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 70rem;
+    margin: auto;
+  }
+}
+
+.title-col {
+  @media only screen and (min-width: $screen-md){
+    margin-top: 1.2rem;
+  }
+}
+.date {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  margin-bottom: 0.3rem;
+
+  @media only screen and (min-width: $screen-sm) {
+    flex-direction: row;
+  }
+
+  & label{
+    @extend .ws-label-text;
+    padding-bottom: 0.4rem;
+  }
+
+  &__col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__row {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  &__date {
+    padding: 0.75rem;
+    background-color: $color-gray;
+    outline: transparent;
+    border: 1px solid $color-primary;
+    border-radius: 10px;
+    color: $color-netural;
+    width: 100%;
+    position: relative;
+    font-family: $font-paragraph;
+  }
+
+  &__time {
+    padding: 0.85rem;
+    background-color: $color-gray;
+    outline: transparent;
+    border: 1px solid $color-primary;
+    border-radius: 10px;
+    color: $color-netural;
+    width: 4rem;
+  }
+
+  &__date:focus,
+  &__date:active,
+  &__time:focus,
+  &__time:active {
+    outline: 2px solid $color-primary;
+  }
+
+  &__icon{
+    &--calendar {
+      position: absolute;
+      display: inline-block;
+      right: 0.95rem;
+      bottom: 0.9rem;
+      padding: 0.1rem;
+      background-color: $color-gray;
+      color: $color-primary;
+      pointer-events: none;
+
+    }
+  }
+}
+
+.date-wrapper {
+  position: relative;
+}
+
+.btn {
+  margin-top: 0.7rem;
+  align-self: flex-start;
+}

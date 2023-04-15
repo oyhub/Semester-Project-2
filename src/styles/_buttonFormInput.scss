@@ -44,6 +44,10 @@
   }
 }
 
+input:focus,
+textarea:focus{
+  outline-offset: 0;
+}
 .ws-input {
   width: 100%;
   position: relative;
@@ -60,9 +64,13 @@
   &__text,
   &__email,
   &__password,
+  &__textarea,
+  &__date,
   &__text:active,
   &__email:active,
-  &__password:active {
+  &__password:active,
+  &__textarea:active,
+  &__date:active{
     width: 100%;
     padding: 0.85rem;
     background-color: $color-gray;
@@ -88,5 +96,3 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: $color-netural;
   -webkit-appearance: none;
 }
-
-

@@ -1,5 +1,6 @@
 @import "src/styles";
 
+
 .active {
   top: 0.1rem;
   left: 0.8rem;
@@ -36,3 +37,23 @@
   transform: translateY(-50%);
   color: $color-gray-light;
 }
+
+.label-top {
+  top: 0;
+  transform: translateY(120%);
+
+  &.active {
+    transform: translateY(10%);
+  }
+}
+
+textarea {
+  height: 10rem;
+  width: 100%;
+}
+
+.border {
+  outline: 1px solid $color-primary;
+}
+
+

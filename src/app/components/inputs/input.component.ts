@@ -11,6 +11,7 @@ export class InputComponent implements OnInit {
   @Input() type: string;
   @Input() name: string;
   @Input() label: string;
+  @Input() showBorder: boolean = false;
 
   active: boolean = false;
   activeEye: boolean = false;
