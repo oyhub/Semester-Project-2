@@ -147,4 +147,20 @@ export class DataService {
     };
     return this.http.post(this.specificUrl, listing, httpOptions).pipe(retry(2));
   }
+
+  bidOnListing(id: string, amount: any) {
+    const token = this.storageService.getToken()
+    const url = this.specificUrl + '/' + id + '/bids';
+
+    httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }),
+    };
+    console.log(id);
+    console.log(amount);
+    console.log(url);
+    return this.http.post(url, amount, httpOptions).pipe(retry(2));
+  }
 }

@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {DataService} from "../../services/data.service";
 import {differenceInDays, differenceInHours, differenceInMinutes, differenceInMonths, format} from "date-fns";
+import {StorageService} from "../../services/storage.service";
 
 @Component({
   selector: 'ws-wine',
@@ -24,18 +25,24 @@ export class ListingComponent implements OnInit {
   seller: string;
   creditsLeft: number;
   ended: boolean = false;
+  user: string;
+  latestBids: any;
+
+  @ViewChild('bidInput', { static: false }) bidInput: ElementRef;
 
   constructor(private route: ActivatedRoute,
-              private dataService: DataService) { }
+              private dataService: DataService,
+              private storageService: StorageService) { }
 
   ngOnInit(): void {
+    this.user = this.storageService.getUser();
     this.id = this.route.snapshot.paramMap.get('id');
     this.dataService.getSpecificListing(this.id).subscribe({
       next: (response: any) => {
         this.listing = response
-        this.buildData();
+        this.buildData(response);
         console.log(response)
-        this.ended = new Date() > new Date(response.endsAt)
+
       },
       error: (error: any) => {
         console.log(error);
@@ -52,22 +59,29 @@ export class ListingComponent implements OnInit {
     });
   }
 
-  buildData() {
-    this.bidValue = 10;
-
-    this.image = this.listing.media[0];
+  buildData(listing) {
+    this.image = listing.media[0];
+    this.ended = new Date() > new Date(listing.endsAt)
 
     if (!this.image) {
       this.placeholderImage = true;
       this.image = "assets/images/wine-bottle-placeholder.jpg"
     }
 
-    this.noBidPlaced = this.listing.bids.length === 0;
-    this.highBid = this.listing.bids?.slice(-1)[0]?.amount;
-    this.endDate = format(new Date(this.listing.endsAt), 'MMMM d. yyyy');
-    this.timeLeft = this.getRemainingTime(this.listing.endsAt);
-    this.seller = this.listing.seller.name.replace(/_/g, " ");
-    this.title = this.formatTitle(this.listing.title);
+    this.noBidPlaced = listing.bids.length === 0;
+    this.highBid = listing.bids?.slice(-1)[0]?.amount;
+    this.endDate = format(new Date(listing.endsAt), 'MMMM d. yyyy');
+    this.timeLeft = this.getRemainingTime(listing.endsAt);
+    this.seller = listing.seller.name.replace(/_/g, " ");
+    this.title = this.formatTitle(listing.title);
+
+    this.bidValue = 10;
+    if(this.highBid) {
+      this.bidValue = this.highBid + 10;
+    }
+
+    this.latestBids = listing.bids.slice(-3).reverse();
+    console.log(this.latestBids);
   }
 
   imageLoadError(): void {
@@ -130,5 +144,33 @@ export class ListingComponent implements OnInit {
 
   private addCoins(user) {
     this.creditsLeft = user.credits;
+  }
+
+  onBid() {
+    const bid = parseInt(this.bidInput.nativeElement.value.trim());
+
+    if(!bid || isNaN(bid)){
+    alert('Please place a valid bid');
+    return
+    }
+
+    if(bid <= this.highBid) {
+      alert('Bid must be higher than existing bid')
+      return;
+    }
+
+    const bidToSend = {
+      "amount": bid
+    }
+
+    this.dataService.bidOnListing(this.id, bidToSend).subscribe({
+      next: () => {},
+      error: (error: any) => {console.log(error)},
+      complete: () => {console.log("bid added")}
+    });
+  }
+
+  bidderName(bid: any) {
+    return this.formatTitle(bid.bidderName.replace(/_/g, " "));
   }
 }

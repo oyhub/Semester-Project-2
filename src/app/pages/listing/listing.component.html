@@ -12,14 +12,23 @@
     </div>
 
     <div class="body-container">
-      <h2 *ngIf="ended" class="ws-mb-3">This auction is ended</h2>
-      <ng-container *ngIf="!ended">
+      <h2 *ngIf="user === listing.seller.name" class="ws-mb-3">This is your auction</h2>
+      <p *ngIf="user === listing.seller.name && ended" class="ws-mb-3">This auction is ended</p>
+      <h2 *ngIf="ended && user !== listing.seller.name" class="ws-mb-3">This auction is ended</h2>
+      <ng-container *ngIf="!ended && user !== listing.seller.name">
       <h2 class="ws-h3 ws-mb-2">Bid on this item</h2>
       <p *ngIf="noBidPlaced" class="ws-mb-2">Be the first to bid on this item</p>
-      <form class="ws-mb-2">
+      <form class="ws-mb-2" (ngSubmit)="onBid()">
         <div class="bid-container">
           <span class="bid-currency">$</span>
-          <input class="bid-input ws-input__text" type="tel" name="" id="" value="{{bidValue}}" (focus)="resetValue($event)">
+          <input
+            class="bid-input ws-input__text"
+            type="tel"
+            name=""
+            id=""
+            value="{{bidValue}}"
+            (focus)="resetValue($event)"
+            #bidInput>
           <button class="bid-btn ws-reset-button" type="submit">Bid</button>
         </div>
       </form>
@@ -42,15 +51,18 @@
             <li><span class="ws-bold">Added by: </span>{{seller}}</li>
           </ul>
         </div>
-        <div *ngIf="highBid" class="history">
-          <h2 class="ws-mb-2">Latest bid</h2>
-          <ul>
-            <li><span class="bold">No bidding history</span></li>
-            <li>
-              <span>User - username</span>
-              <span>date date </span>
-            </li>
-          </ul>
+
+        <div class="history">
+          <p *ngIf="!highBid" class="ws-h2">No bidding history</p>
+          <ng-container *ngIf="highBid">
+            <h2 class="ws-mb-2">Latest bid</h2>
+            <ul>
+              <li *ngFor="let bid of latestBids">
+                <p><span class="ws-bold">Bid by: </span>{{bidderName(bid)}}</p>
+                <p><span class="ws-bold">Bid amount: </span>$ {{bid.amount}} </p>
+              </li>
+            </ul>
+          </ng-container>
         </div>
       </div>
     </div>
