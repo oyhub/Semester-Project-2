@@ -11,7 +11,7 @@ export class Constants {
   public readonly LISTING_OPTIONS = '?_bids=true&_active=true';
   public readonly SPECIFIC_OPTIONS = '?_bids=true&_seller=true';
   public readonly PROFILE_URL = '/profiles'
-  public readonly LISTINGS_LIMIT = 10;
+  public readonly LISTINGS_LIMIT = 20;
 
 
   public readonly TOKEN_KEY = 'token';

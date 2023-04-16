@@ -81,7 +81,6 @@ export class ListingComponent implements OnInit {
     }
 
     this.latestBids = listing.bids.slice(-3).reverse();
-    console.log(this.latestBids);
   }
 
   imageLoadError(): void {

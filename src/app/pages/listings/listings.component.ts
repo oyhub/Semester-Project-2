@@ -37,7 +37,7 @@ export class ListingsComponent implements OnInit {
   }
 
   loadMore() {
-    this.listingOffset = this.listingOffset + 10;
+    this.listingOffset = this.listingOffset + this.listingsLimit;
     this.getListings((this.listingOffset));
   }
 
