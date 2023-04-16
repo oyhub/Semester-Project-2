@@ -8,6 +8,7 @@ import {ModalService} from "./modal.service";
 import {UserService} from "./user.service";
 import {Register} from "../models/register.model";
 import {Observable} from "rxjs";
+import {CreateNew} from "../models/createNew.model";
 
 let httpOptions = {
   headers: new HttpHeaders({
@@ -84,7 +85,7 @@ export class DataService {
   }
 
   getListings(offset: number = 0): Observable<any> {
-    const listingsUrl = `${this.listingsUrl}&limit=${this.listingsLimit}&offset=${offset}`;
+    const listingsUrl = `${this.listingsUrl}&limit=${this.listingsLimit}&offset=${offset}&sort=created`;
     return this.http.get(listingsUrl, httpOptions).pipe(retry(2));
   }
 
@@ -133,5 +134,17 @@ export class DataService {
       }),
     };
     return this.http.get(userBidUrl, httpOptions).pipe(retry(2));
+  }
+
+  postListing(listing: CreateNew): Observable<any> {
+    const token = this.storageService.getToken()
+
+    httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }),
+    };
+    return this.http.post(this.specificUrl, listing, httpOptions).pipe(retry(2));
   }
 }

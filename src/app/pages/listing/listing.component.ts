@@ -66,7 +66,7 @@ export class ListingComponent implements OnInit {
     this.highBid = this.listing.bids?.slice(-1)[0]?.amount;
     this.endDate = format(new Date(this.listing.endsAt), 'MMMM d. yyyy');
     this.timeLeft = this.getRemainingTime(this.listing.endsAt);
-    this.seller = this.listing.seller.name;
+    this.seller = this.listing.seller.name.replace(/_/g, " ");
     this.title = this.formatTitle(this.listing.title);
   }
 

@@ -13,12 +13,14 @@
     name="{{name}}"
     type="{{type}}"
     [class.border]="showBorder"
-    [id]="id" [(ngModel)]="inputValue"
+    [id]="id"
+    [(ngModel)]="inputValue"
     (focus)="onFocus()"
     (blur)="onBlur()">
   <textarea
     *ngIf="type === 'textarea'"
     class="ws-input__{{type}} border"
+    [(ngModel)]="inputValue"
     (focus)="onFocus()"
     (blur)="onBlur()"></textarea>
   <button *ngIf="showEye" class="password-eye ws-reset-button" (click)="toggleEye($event)">

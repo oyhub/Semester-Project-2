@@ -28,17 +28,17 @@
           <div class="date">
             <div class="date__col date-wrapper">
               <label>End date</label>
-              <input class="date__date" type="date">
+              <input class="date__date" type="date" #dateInput>
               <i class="date__icon--calendar fa-solid fa-calendar"></i>
             </div>
             <div class="date__row">
               <div class="date__col">
                 <label>Hour</label>
-                <input class="date__time" type="text">
+                <input class="date__time" type="text" #hourInput>
               </div>
               <div class="date__col">
                 <label>Min</label>
-                <input class="date__time" type="text">
+                <input class="date__time" type="text" #minInput>
               </div>
             </div>
           </div>
@@ -69,7 +69,7 @@
         </ws-input>
       </div>
 
-      <button ws-button type="submit" class="btn ws-center-button-x">Save & publish</button>
+      <button ws-button type="submit" class="btn ws-center-button-x" (click)="onSubmit($event)">Save & publish</button>
     </div>
   </form>
 </div>
