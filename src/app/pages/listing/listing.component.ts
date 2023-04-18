@@ -69,7 +69,6 @@ export class ListingComponent implements OnInit {
       this.image = "assets/images/wine-bottle-placeholder.jpg"
     }
 
-    console.log(listing.tags)
     this.category = this.categoryService.getCategory(listing.tags);
     this.noBidPlaced = listing.bids.length === 0;
     this.highBid = listing.bids?.slice(-1)[0]?.amount;
