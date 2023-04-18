@@ -42,7 +42,7 @@
         <div class="info">
           <h2 class="ws-mb-2">Information</h2>
           <ul>
-            <li *ngIf="!ended"><span class="ws-bold">Highest bid: </span>$ {{highBid}}</li>
+            <li *ngIf="!ended"><span class="ws-bold">Highest bid: </span><span *ngIf="highBid">$</span> {{highBid}}</li>
             <li *ngIf="ended && highBid"><span class="ws-bold">Winning bid: </span>$ {{highBid}}</li>
             <li *ngIf="ended && !highBid"><span class="ws-bold">No bids, not sold </span></li>
             <li><span class="ws-bold">Category: </span> ||category||</li>
