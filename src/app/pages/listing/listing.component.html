@@ -2,7 +2,7 @@
   <div class="header ws-mb-6">
     <h1>{{title}}</h1>
     <div class="category-icon">
-      Category
+      {{category}}
     </div>
   </div>
 
@@ -45,7 +45,7 @@
             <li *ngIf="!ended"><span class="ws-bold">Highest bid: </span><span *ngIf="highBid">$</span> {{highBid}}</li>
             <li *ngIf="ended && highBid"><span class="ws-bold">Winning bid: </span>$ {{highBid}}</li>
             <li *ngIf="ended && !highBid"><span class="ws-bold">No bids, not sold </span></li>
-            <li><span class="ws-bold">Category: </span> ||category||</li>
+            <li><span class="ws-bold">Category: </span>{{category}}</li>
             <li *ngIf="!ended"><span class="ws-bold">Ends at: </span>{{endDate}} - {{timeLeft}}</li>
             <li *ngIf="ended"><span class="ws-bold">Ended at: </span>{{endDate}}</li>
             <li><span class="ws-bold">Added by: </span>{{seller}}</li>

@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {DataService} from "../../services/data.service";
 import {differenceInDays, differenceInHours, differenceInMinutes, differenceInMonths, format} from "date-fns";
 import {StorageService} from "../../services/storage.service";
+import {CategoryService} from "../../services/category.service";
 
 @Component({
   selector: 'ws-wine',
@@ -32,7 +33,8 @@ export class ListingComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private dataService: DataService,
-              private storageService: StorageService) { }
+              private storageService: StorageService,
+              private categoryService: CategoryService) { }
 
   ngOnInit(): void {
     this.user = this.storageService.getUser();
@@ -41,7 +43,6 @@ export class ListingComponent implements OnInit {
       next: (response: any) => {
         this.listing = response
         this.buildData(response);
-        console.log(response)
 
       },
       error: (error: any) => {
@@ -68,6 +69,8 @@ export class ListingComponent implements OnInit {
       this.image = "assets/images/wine-bottle-placeholder.jpg"
     }
 
+    console.log(listing.tags)
+    this.category = this.categoryService.getCategory(listing.tags);
     this.noBidPlaced = listing.bids.length === 0;
     this.highBid = listing.bids?.slice(-1)[0]?.amount;
     this.endDate = format(new Date(listing.endsAt), 'MMMM d. yyyy');
