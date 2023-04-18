@@ -10,9 +10,11 @@ import {DataService} from "../../services/data.service";
 })
 export class CreateNewComponent implements OnInit {
   data: CreateNew;
+  active: boolean = false;
+  focused: boolean = false;
 
   @ViewChild('titleInput', { static: false }) title: InputComponent;
-  @ViewChild('categoryInput', { static: false }) category: InputComponent;
+  @ViewChild('categoryInput', { static: false }) category: ElementRef;
   @ViewChild('dateInput', { static: false }) date: ElementRef;
   @ViewChild('hourInput', { static: false }) hour: ElementRef;
   @ViewChild('minInput', { static: false }) min: ElementRef;
@@ -29,11 +31,10 @@ export class CreateNewComponent implements OnInit {
 
     if(
       !this.title.inputValue ||
-      !this.category.inputValue ||
+      !this.category.nativeElement.value ||
       !this.date.nativeElement.value ||
       !this.hour.nativeElement.value ||
       !this.min.nativeElement.value ||
-      !this.photo.inputValue ||
       !this.description.inputValue
       ){
       alert('Please fill in all forms')
@@ -48,9 +49,12 @@ export class CreateNewComponent implements OnInit {
     this.data = {
       title: this.title.inputValue.trim(),
       description: this.description.inputValue.trim(),
-      tags: [this.category.inputValue.trim()],
-      media: [this.photo.inputValue.trim()],
+      tags: [this.category.nativeElement.value, 'ws-wine'],
       endsAt: endDate.toString()
+    }
+
+    if(this.photo.inputValue){
+      this.data.media = [this.photo.inputValue?.trim()];
     }
 
     console.log(this.data)
@@ -62,6 +66,15 @@ export class CreateNewComponent implements OnInit {
       error: (error: any) => {console.log(error)},
       complete: () => {console.log("listing added")}
     });
+  }
+
+  onFocus() {
+    this.focused = true;
+  }
+
+  onBlur() {
+    this.focused = false;
+    this.active = this.category.nativeElement.value ? true : false;
   }
 
 }

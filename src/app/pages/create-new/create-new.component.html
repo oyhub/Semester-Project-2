@@ -14,15 +14,19 @@
           #titleInput>
         </ws-input>
 
-        <ws-input
-          class="ws-mb-1"
-          type="text"
-          label="Category"
-          name="category"
-          id="category"
-          [showBorder]="true"
-          #categoryInput>
-        </ws-input>
+        <div class="select ws-mt-2">
+          <label for="category" class="select__label ws-label-text--placeholder ws-input__label" [class.active]="active || focused">Category</label>
+          <select class="select__bar" name="category" id="category" (focus)="onFocus()" (blur)="onBlur()" #categoryInput>
+            <option value="">- Category -</option>
+            <option value="ws-red">Red</option>
+            <option value="ws-white">White</option>
+            <option value="ws-rose">Rosé</option>
+            <option value="ws-dessert">Dessert</option>
+            <option value="ws-champange">Champange</option>
+            <option value="ws-sparkeling">Other Sparkeling</option>
+          </select>
+          <span class="select__arrow"><i class="fa-solid fa-sort-down"></i></span>
+        </div>
       </div>
       <div class="flex-col">
           <div class="date">

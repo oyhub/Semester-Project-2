@@ -13,7 +13,7 @@
   &:before {
     content: "";
     position: absolute;
-    top: 0.6rem;
+    top: 0.5rem;
     left: 0;
     background-color: $color-gray;
     height: 100%;
@@ -50,6 +50,7 @@
 textarea {
   height: 10rem;
   width: 100%;
+  font-family: $font-paragraph;
 }
 
 .border {
