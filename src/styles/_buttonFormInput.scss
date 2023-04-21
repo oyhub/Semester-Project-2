@@ -66,11 +66,13 @@ textarea:focus{
   &__password,
   &__textarea,
   &__date,
+  &__url,
   &__text:active,
   &__email:active,
   &__password:active,
   &__textarea:active,
-  &__date:active{
+  &__date:active,
+  &__url:active{
     width: 100%;
     padding: 0.85rem;
     background-color: $color-gray;

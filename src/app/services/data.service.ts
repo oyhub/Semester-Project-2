@@ -148,7 +148,7 @@ export class DataService {
     return this.http.post(this.specificUrl, listing, httpOptions).pipe(retry(2));
   }
 
-  bidOnListing(id: string, amount: any) {
+  bidOnListing(id: string, amount: any): Observable<any>  {
     const token = this.storageService.getToken()
     const url = this.specificUrl + '/' + id + '/bids';
 
@@ -158,9 +158,23 @@ export class DataService {
         'Authorization': `Bearer ${token}`
       }),
     };
-    console.log(id);
-    console.log(amount);
-    console.log(url);
     return this.http.post(url, amount, httpOptions).pipe(retry(2));
+  }
+
+  updateAvatar(url: string) {
+    const token = this.storageService.getToken();
+    const user = this.storageService.getUser();
+    const mediaUrl = this.profileUrl + '/' + user + '/media';
+    const urlBody = {
+      "avatar": url
+    }
+
+    httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }),
+    };
+    return this.http.put(mediaUrl, urlBody, httpOptions).pipe(retry(2));
   }
 }

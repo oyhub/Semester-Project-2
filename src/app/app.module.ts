@@ -18,12 +18,32 @@ import { CardComponent } from './components/card/card.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CreateNewComponent } from './pages/create-new/create-new.component';
 import { ListingComponent } from './pages/listing/listing.component';
+import {AuthGuard} from "./guards/auth.guard";
 
 const routes: Routes = [
-  { path: '', component: ListingsComponent },
-  { path: 'listing/:id', component: ListingComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'create-new', component: CreateNewComponent },
+  {
+    path: '',
+    component: ListingsComponent
+  },{
+    path: 'listing/:id',
+    component: ListingComponent,
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard]
+  },{
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard]
+
+  },{
+    path: 'create-new',
+    component: CreateNewComponent,
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard]
+  },{
+    path: '**',
+    redirectTo: '/'
+  }
 ];
 
 @NgModule({
@@ -49,7 +69,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

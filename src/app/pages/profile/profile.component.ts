@@ -1,6 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {DataService} from "../../services/data.service";
 import {forkJoin, map, Observable, of} from "rxjs";
+import {InputComponent} from "../../components/inputs/input.component";
+import {Avatars} from "../../models/avatars.model";
 
 @Component({
   selector: 'ws-profile-page',
@@ -14,8 +16,12 @@ export class ProfileComponent implements OnInit {
   credits: number;
   username: string;
   avatar: string;
+  avatars: Avatars[];
+  activeAvatar: any;
 
   @ViewChild('headingH1') headingH1: ElementRef;
+  @ViewChild('imageInput', { static: false }) imageInput: InputComponent;
+
 
   constructor(private dataService: DataService) { }
 
@@ -38,6 +44,18 @@ export class ProfileComponent implements OnInit {
         console.log(error);
       }
     });
+
+    this.avatars = [
+      { src: "assets/images/avatar-people/01.png", alt: "Avatar 1" },
+      { src: "assets/images/avatar-people/02.png", alt: "Avatar 2" },
+      { src: "assets/images/avatar-people/03.png", alt: "Avatar 3" },
+      { src: "assets/images/avatar-people/04.png", alt: "Avatar 4" },
+      { src: "assets/images/avatar-people/05.png", alt: "Avatar 5" },
+      { src: "assets/images/avatar-people/06.png", alt: "Avatar 6" },
+      { src: "assets/images/avatar-people/07.png", alt: "Avatar 7" },
+      { src: "assets/images/avatar-people/08.png", alt: "Avatar 8" },
+      { src: "assets/images/avatar-people/09.png", alt: "Avatar 9" }
+    ];
   }
 
   getCurrentPrice(listing) {
@@ -72,5 +90,35 @@ export class ProfileComponent implements OnInit {
     }).flat();
 
     return forkJoin(winObservables) as Observable<any[]>;
+  }
+
+  updateAvatar() {
+  if (!this.imageInput.inputValue) {
+    alert('Please provide an url for the image')
+    return
+  }
+
+  const urlToSend = this.imageInput.inputValue;
+
+  this.dataService.updateAvatar(urlToSend).subscribe({
+    next: (response: any) => {alert('Avatar image updated')},
+    error: (error: any) => {alert('Something went wrong')}
+  });
+  }
+
+  updateLocalAvatar() {
+    if (!this.activeAvatar) {
+      alert('Choose on of our avatars to continue')
+      return
+    }
+    this.dataService.updateAvatar(this.activeAvatar.src).subscribe({
+      next: (response: any) => {alert('Avatar image updated')},
+      error: (error: any) => {alert('Something went wrong')}
+    });
+
+  }
+
+  setActiveAvatar(avatar) {
+    this.activeAvatar = avatar;
   }
 }

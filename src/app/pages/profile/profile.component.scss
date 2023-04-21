@@ -66,13 +66,11 @@
 }
 
 .wrapper {
-  @media only screen and (min-width: $screen-md) {
-    width: 80%;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    gap: 1.5rem;
-  }
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(18rem, 1fr) );
+  gap: 3.5rem;
+  justify-items: center;
+  grid-auto-rows: min-content;
 }
 
 .listing,
@@ -83,4 +81,49 @@
 .listings,
 .wins {
   width: fit-content;
+}
+
+//Maybe fix this
+.listings {
+  grid-row: span 10;
+}
+
+.avatar {
+  width: clamp(15rem, 100%, 25rem);
+  height: min-content;
+
+  &__choose {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+    background-color: $color-dark;
+    padding: 2rem;
+    border-radius: 10px;
+
+    & p {
+      grid-column: -1 / 1;
+      margin-top: 0.5rem;
+    }
+
+    & button {
+      grid-column: 1 / 4;
+    }
+  }
+
+  &__img {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border: 2px solid $color-primary;
+
+    &.selected {
+      border: 2px solid $color-secondary;
+      outline: 2px solid $color-secondary;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }

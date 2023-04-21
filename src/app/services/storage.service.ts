@@ -23,8 +23,7 @@ export class StorageService {
   }
 
   public getUser(): any {
-    const user = this.getFromStorage(this.constants.USER_KEY)
-
+    const user = localStorage.getItem(this.constants.USER_KEY);
     return user ? user : null;
   }
 

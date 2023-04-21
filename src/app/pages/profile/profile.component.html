@@ -10,8 +10,24 @@
   <div class="wrapper">
     <div class="avatar ws-mb-6">
       <h2 class="ws-mb-4">Edit user avatar</h2>
-      <div class="accordion">
-        <p>Edit avatar</p>
+      <div>
+        <p>Provide your own avatar, with an active url to the image</p>
+        <form (ngSubmit)="updateAvatar()">
+          <ws-input
+            type="url"
+            id="imageInput"
+            label="Avatar URL"
+            name="imageInput"
+          #imageInput>
+          </ws-input>
+          <button ws-button type="submit">Update avatar</button>
+        </form>
+      </div>
+
+      <div class="avatar__choose">
+        <p>Select one of our avatars</p>
+        <img *ngFor="let avatar of avatars" class="avatar__img" [src]="avatar.src" [alt]="avatar.alt" [class.selected]="activeAvatar === avatar" (click)="setActiveAvatar(avatar)">
+        <button ws-button (click)="updateLocalAvatar()">Update avatar</button>
       </div>
     </div>
 
