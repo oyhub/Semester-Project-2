@@ -101,14 +101,14 @@
     padding: 2rem;
     border-radius: 10px;
 
-    & p {
-      grid-column: -1 / 1;
-      margin-top: 0.5rem;
-    }
-
     & button {
       grid-column: 1 / 4;
     }
+  }
+
+  &__select-message {
+    grid-column: -1 / 1;
+    margin-top: 0.5rem;
   }
 
   &__img {

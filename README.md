@@ -25,3 +25,13 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Validation Service
+To make validation easier, you can use the project's validation service. 
+For example, if you set a validationMessage to display errors, you can easily show the correct error
+based on what has been incorrectly validated.
+
+Read the documentation for [Validation Service](VALIDATION.md) for more info.
+
+
+ 

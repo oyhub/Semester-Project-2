@@ -98,3 +98,8 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: $color-netural;
   -webkit-appearance: none;
 }
+
+.ws-input-error-message{
+  color: $color-error;
+  font-size: 0.9rem;
+}

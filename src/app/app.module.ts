@@ -12,7 +12,7 @@ import { DoubleButtonComponent } from './components/double-button/double-button.
 import { FooterComponent } from './components/footer/footer.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { InputComponent } from './components/inputs/input.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ListingsComponent } from './pages/listings/listings.component';
 import { CardComponent } from './components/card/card.component';
 import { ProfileComponent } from './pages/profile/profile.component';
@@ -66,7 +66,8 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    ReactiveFormsModule
   ],
   exports: [RouterModule],
   providers: [AuthGuard],

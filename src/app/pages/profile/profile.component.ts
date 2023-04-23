@@ -1,8 +1,10 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {DataService} from "../../services/data.service";
-import {forkJoin, map, Observable, of} from "rxjs";
+import {debounceTime, forkJoin, map, Observable, of} from "rxjs";
 import {InputComponent} from "../../components/inputs/input.component";
 import {Avatars} from "../../models/avatars.model";
+import { FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ValidationService} from "../../services/validation.service";
 
 @Component({
   selector: 'ws-profile-page',
@@ -18,12 +20,15 @@ export class ProfileComponent implements OnInit {
   avatar: string;
   avatars: Avatars[];
   activeAvatar: any;
+  avatarFormFromUrl: FormGroup;
+  localAvatarError: boolean = false;
 
   @ViewChild('headingH1') headingH1: ElementRef;
   @ViewChild('imageInput', { static: false }) imageInput: InputComponent;
 
+  validationMessage: any;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private formBuilder: FormBuilder, private validationService: ValidationService) { }
 
   ngOnInit(): void {
     forkJoin([
@@ -56,6 +61,23 @@ export class ProfileComponent implements OnInit {
       { src: "assets/images/avatar-people/08.png", alt: "Avatar 8" },
       { src: "assets/images/avatar-people/09.png", alt: "Avatar 9" }
     ];
+
+    this.avatarFormFromUrl = this.formBuilder.group({
+      avatarFromUrl: ['', [Validators.required, Validators.pattern('^(?:http(s)?:\\/\\/)?[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&\'\\(\\)\\*\\+,;=.]+$')]],
+    });
+
+    this.validationService.setValidationMessages({
+      avatarFromUrl: {
+        required: 'A URL is required',
+        pattern: 'Please make sure the URL is a string'
+      }
+    });
+
+    this.validationMessage = this.validationService.resetValidationMessages(this.avatarFormFromUrl);
+
+    this.avatarFormFromUrl.valueChanges.pipe(debounceTime(1200)).subscribe(value => {
+      this.validationMessage = this.validationService.getValidationMessages(this.avatarFormFromUrl);
+    });
   }
 
   getCurrentPrice(listing) {
@@ -93,22 +115,15 @@ export class ProfileComponent implements OnInit {
   }
 
   updateAvatar() {
-  if (!this.imageInput.inputValue) {
-    alert('Please provide an url for the image')
-    return
-  }
-
-  const urlToSend = this.imageInput.inputValue;
-
-  this.dataService.updateAvatar(urlToSend).subscribe({
-    next: (response: any) => {alert('Avatar image updated')},
-    error: (error: any) => {alert('Something went wrong')}
-  });
+    if (this.avatarFormFromUrl.status === 'INVALID'){
+      this.validationMessage = this.validationService.getValidationMessages(this.avatarFormFromUrl);
+    }
   }
 
   updateLocalAvatar() {
+    this.localAvatarError = false;
     if (!this.activeAvatar) {
-      alert('Choose on of our avatars to continue')
+      this.localAvatarError = true;
       return
     }
     this.dataService.updateAvatar(this.activeAvatar.src).subscribe({
