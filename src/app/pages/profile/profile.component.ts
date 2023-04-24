@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {DataService} from "../../services/data.service";
-import {debounceTime, forkJoin, map, Observable, of} from "rxjs";
+import { forkJoin, map, Observable, of} from "rxjs";
 import {InputComponent} from "../../components/inputs/input.component";
 import {Avatars} from "../../models/avatars.model";
 import { FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -69,14 +69,14 @@ export class ProfileComponent implements OnInit {
     this.validationService.setValidationMessages({
       avatarFromUrl: {
         required: 'A URL is required',
-        pattern: 'Please make sure the URL is a string'
+        pattern: 'Please make input is avalid URL'
       }
     });
 
     this.validationMessage = this.validationService.resetValidationMessages(this.avatarFormFromUrl);
 
-    this.avatarFormFromUrl.valueChanges.pipe(debounceTime(1200)).subscribe(value => {
-      this.validationMessage = this.validationService.getValidationMessages(this.avatarFormFromUrl);
+    this.validationService.trackFieldChanges(this.avatarFormFromUrl, (fieldName, validationMessage) => {
+      this.validationMessage[fieldName] = validationMessage;
     });
   }
 
@@ -117,7 +117,12 @@ export class ProfileComponent implements OnInit {
   updateAvatar() {
     if (this.avatarFormFromUrl.status === 'INVALID'){
       this.validationMessage = this.validationService.getValidationMessages(this.avatarFormFromUrl);
+      return
     }
+    this.dataService.updateAvatar(this.avatarFormFromUrl.controls['avatarFromUrl'].value).subscribe({
+      next: (response: any) => {alert('Avatar image updated')},
+      error: (error: any) => {alert('Something went wrong')}
+    });
   }
 
   updateLocalAvatar() {

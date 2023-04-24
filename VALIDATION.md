@@ -19,7 +19,7 @@ myForm: FormGroup;
 myValidationMessage: any;
 ```
 
-Build the form you need, with the validations that are necessary, for example:
+Build the form you need in ngOnInit, with the validations that are necessary, for example:
 ```js
     this.myForm = this.formBuilder.group({
       myInputOne: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
@@ -67,12 +67,14 @@ The form can then look like this, for example:
 Now you can use the validation service wherever it is needed. 
 Below is an example of using it when changing an input field or when clicking submit:
 ```js
+// For validating on submit
   submitForm() {
     if (this.avatarForm.status === 'INVALID'){
       this.myValidationMessage = this.validationService.getValidationMessages(this.myForm);
     }
-
-  this.myForm.valueChanges.pipe(debounceTime(1200)).subscribe(value => {
-    this.myValidationMessage = this.validationService.getValidationMessages(this.myForm);
+    
+//Validates when a inputfield is untuched for x seconds - time is set in app.constants.ts
+  this.validationService.trackFieldChanges(this.myForm, (fieldName, validationMessage) => {
+    this.myValidationMessage[fieldName] = validationMessage;
   });
 ```

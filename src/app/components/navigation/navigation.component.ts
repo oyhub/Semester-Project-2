@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import { ScreenWidthDetectionService } from 'src/app/services/screen-width-detection.service';
-import {Subscription} from "rxjs";
+import { Subscription} from "rxjs";
 import {ModalService} from "../../services/modal.service";
 import {InputComponent} from "../inputs/input.component";
 import {Login} from "../../models/login.model";
@@ -8,6 +8,9 @@ import {DataService} from "../../services/data.service";
 import {StorageService} from "../../services/storage.service";
 import {UserService} from "../../services/user.service";
 import {Register} from "../../models/register.model";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ValidationService} from "../../services/validation.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'ws-navigation',
@@ -26,14 +29,18 @@ export class NavigationComponent implements OnInit, OnDestroy {
   private screenSmallSubscription: Subscription;
   private userSubscription: Subscription;
 
+  // Register form variables
+  regForm: FormGroup;
+  regValidationMessage: any;
+
   @ViewChild('login', { static: true }) loginTemplate;
   @ViewChild('logout', { static: true }) logoutTemplate;
   @ViewChild('register', { static: true }) registerTemplate;
   @ViewChild('emailInput') email: InputComponent;
   @ViewChild('passwordInput') password: InputComponent;
-  @ViewChild('regEmailInput') regEmail: InputComponent;
-  @ViewChild('regPasswordInput') regPassword: InputComponent;
-  @ViewChild('regUsernameInput') regUsername: InputComponent;
+  // @ViewChild('regEmailInput') regEmail: InputComponent;
+  // @ViewChild('regPasswordInput') regPassword: InputComponent;
+  // @ViewChild('regUsernameInput') regUsername: InputComponent;
 
 
   constructor(
@@ -41,7 +48,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
     public modalService: ModalService,
     private dataService: DataService,
     private storageService: StorageService,
-    private userService: UserService
+    private userService: UserService,
+    private formBuilder: FormBuilder,
+    private validationService: ValidationService,
+    private router: Router
   ) {
       this.modalService.showModal$.subscribe(show => this.showModal = show);
   }
@@ -65,6 +75,38 @@ export class NavigationComponent implements OnInit, OnDestroy {
         this.isLoggedIn = status;
       }
     );
+
+    this.regForm = this.formBuilder.group({
+      regEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$')]],
+      regUsername: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\s]+$')]],
+      regPassword: ['', [Validators.required, Validators.pattern('^[^\\s]+$'), Validators.minLength(6)]]
+    });
+
+    this.validationService.setValidationMessages({
+      regEmail: {
+        required: 'You need to fill in a email adress',
+        pattern: 'You need to fill in a valid @stud.noroff.no email adress'
+      },
+      regUsername: {
+        required: 'You need to fill in a username',
+        pattern: 'The username can only contain alphanumeric characters'
+      },
+      regPassword: {
+        required: 'You need to fill in a password',
+        pattern: 'The password can not contain any spaces',
+        minLength: 'The password must be 6 or more characters'
+      }
+    });
+    this.regValidationMessage = this.validationService.resetValidationMessages(this.regForm);
+
+    // this.regForm.valueChanges.pipe(debounceTime(1200)).subscribe(value => {
+    //   console.log(value)
+    //   this.regValidationMessage = this.validationService.getValidationMessages(this.regForm);
+    // });
+
+    this.validationService.trackFieldChanges(this.regForm, (fieldName, validationMessage) => {
+      this.regValidationMessage[fieldName] = validationMessage;
+    });
 
   }
 
@@ -107,15 +149,15 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   onRegister() {
-    if (!this.regEmail.inputValue || !this.regPassword.inputValue || !this.regUsername.inputValue) {
-      alert('Please write in register details');
-      return;
+    if (this.regForm.status === 'INVALID'){
+      this.regValidationMessage = this.validationService.getValidationMessages(this.regForm);
+      return
     }
 
     const register: Register = {
-      name: this.regUsername.inputValue.trim(),
-      email: this.regEmail.inputValue.trim(),
-      password: this.regPassword.inputValue.trim()
+      name: this.regForm.controls['regName'].value,
+      email: this.regForm.controls['regEmail'].value,
+      password: this.regForm.controls['regPassword'].value
     }
 
     this.dataService.register(register);
@@ -131,6 +173,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.storageService.clearAllStorage();
     this.userService.checkIfUserExist();
     this.modalService.closeModal()
+    this.router.navigateByUrl('/');
   }
 
 }

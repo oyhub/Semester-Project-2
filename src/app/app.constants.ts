@@ -16,4 +16,6 @@ export class Constants {
 
   public readonly TOKEN_KEY = 'token';
   public readonly USER_KEY = 'user';
+
+  public readonly INPUT_DELAY = 1200;
 }

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {FormGroup} from "@angular/forms";
+import {debounceTime, distinctUntilChanged} from "rxjs";
+import {Constants} from "../app.constants";
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,7 @@ export class ValidationService {
 
   private validationMessages: any = {};
 
-  constructor() { }
+  constructor(private constants: Constants) { }
 
   setValidationMessages(messages: any) {
     this.validationMessages = messages;
@@ -37,5 +39,19 @@ export class ValidationService {
       }
     });
     return messages;
+  }
+
+  trackFieldChanges(formGroup: FormGroup, onFieldChange: (fieldName: string, validationMessage: string) => void): void {
+    Object.keys(formGroup.controls).forEach((key) => {
+      formGroup.get(key).valueChanges
+        .pipe(
+          debounceTime(this.constants.INPUT_DELAY),
+          distinctUntilChanged()
+        )
+        .subscribe((value) => {
+          const validationMessage = this.getValidationMessages(formGroup)[key];
+          onFieldChange(key, validationMessage);
+        });
+    });
   }
 }

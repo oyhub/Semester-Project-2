@@ -77,35 +77,53 @@
 
 <ng-template #register>
   <h2 class="ws-h3 ws-mb-3">Register new user</h2>
-  <form (ngSubmit)="onRegister()">
-    <ws-input
-      class="ws-mb-1"
-      type="email"
-      label="E-mail"
-      name="email"
-      id="reg-email"
-      #regEmailInput>
-    </ws-input>
-
-    <ws-input
-      class="ws-mb-1"
-      type="text"
-      label="Username"
-      name="username"
-      id="username"
-      #regUsernameInput>
-    </ws-input>
-
-    <ws-input
-      class="ws-mb-1"
-      type="password"
-      label="Password"
-      name="password"
-      id="reg-password"
-      #regPasswordInput>
-    </ws-input>
-
+  <form [formGroup]="regForm" (ngSubmit)="onRegister()">
+    <div>
+      <label for="regEmail">Email:</label>
+      <input class="ws-input__text" type="email" name="regEmail" id="regEmail" formControlName="regEmail">
+      <p *ngIf="regValidationMessage.regEmail" class="ws-input-error-message">{{regValidationMessage.regEmail}}</p>
+    </div>
+    <div>
+      <label for="regUsername">Username:</label>
+      <input class="ws-input__text" type="text" name="regUsername" id="regUsername" formControlName="regUsername">
+      <p *ngIf="regValidationMessage.regUsername" class="ws-input-error-message">{{regValidationMessage.regUsername}}</p>
+    </div>
+    <div>
+      <label for="regPassword">Password:</label>
+      <input class="ws-input__text" type="password" name="regPassword" id="regPassword" formControlName="regPassword">
+      <p *ngIf="regValidationMessage.regPassword" class="ws-input-error-message">{{regValidationMessage.regPassword}}</p>
+    </div>
     <button ws-button class="ws-my-5 ws-center-button-x" type="submit">Register</button>
   </form>
+<!--  <form (ngSubmit)="onRegister()">-->
+<!--    <ws-input-->
+<!--      class="ws-mb-1"-->
+<!--      type="email"-->
+<!--      label="E-mail"-->
+<!--      name="email"-->
+<!--      id="reg-email"-->
+<!--      #regEmailInput>-->
+<!--    </ws-input>-->
+
+<!--    <ws-input-->
+<!--      class="ws-mb-1"-->
+<!--      type="text"-->
+<!--      label="Username"-->
+<!--      name="username"-->
+<!--      id="username"-->
+<!--      #regUsernameInput>-->
+<!--    </ws-input>-->
+
+<!--    <ws-input-->
+<!--      class="ws-mb-1"-->
+<!--      type="password"-->
+<!--      label="Password"-->
+<!--      name="password"-->
+<!--      id="reg-password"-->
+<!--      #regPasswordInput>-->
+<!--    </ws-input>-->
+
+<!--    <button ws-button class="ws-my-5 ws-center-button-x" type="submit">Register</button>-->
+<!--  </form>-->
   <button class="ws-reset-button ws-input-links ws-center-button-x">Already a user? Login here</button>
 </ng-template>
