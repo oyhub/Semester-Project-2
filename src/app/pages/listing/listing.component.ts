@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {DataService} from "../../services/data.service";
 import {differenceInDays, differenceInHours, differenceInMinutes, differenceInMonths, format} from "date-fns";
@@ -34,7 +34,6 @@ export class ListingComponent implements OnInit {
   bidForm: FormGroup;
   bidValidationMessage: any;
 
-  @ViewChild('bidInput', { static: false }) bidInput: ElementRef;
 
   constructor(private route: ActivatedRoute,
               private dataService: DataService,
@@ -174,7 +173,6 @@ export class ListingComponent implements OnInit {
   }
 
   onBid() {
-    console.log(this.bidValidationMessage.bidInput)
     if (this.bidForm.status === 'INVALID'){
       this.bidValidationMessage = this.validationService.getValidationMessages(this.bidForm);
       return

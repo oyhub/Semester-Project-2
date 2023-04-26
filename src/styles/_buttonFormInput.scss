@@ -77,11 +77,11 @@ textarea:focus{
     padding: 0.85rem;
     background-color: $color-gray;
     outline: transparent;
-    border: 0;
     border-radius: 10px;
     color: $color-netural;
     margin-bottom: 0.7rem;
     margin-top: 0.7rem;
+    border: 1px solid $color-primary;
 
     &:focus {
       outline: $color-primary 2px solid;

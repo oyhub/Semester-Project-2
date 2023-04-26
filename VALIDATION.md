@@ -69,7 +69,7 @@ Below is an example of using it when changing an input field or when clicking su
 ```js
 // For validating on submit
   submitForm() {
-    if (this.avatarForm.status === 'INVALID'){
+    if (this.myForm.status === 'INVALID'){
       this.myValidationMessage = this.validationService.getValidationMessages(this.myForm);
     }
     

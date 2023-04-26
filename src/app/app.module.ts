@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule, Routes } from '@angular/router';
-
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -12,13 +12,12 @@ import { DoubleButtonComponent } from './components/double-button/double-button.
 import { FooterComponent } from './components/footer/footer.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { InputComponent } from './components/inputs/input.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ListingsComponent } from './pages/listings/listings.component';
 import { CardComponent } from './components/card/card.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CreateNewComponent } from './pages/create-new/create-new.component';
 import { ListingComponent } from './pages/listing/listing.component';
-import {AuthGuard} from "./guards/auth.guard";
+import { AuthGuard } from "./guards/auth.guard";
 
 const routes: Routes = [
   {

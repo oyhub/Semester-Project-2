@@ -69,7 +69,7 @@ export class ProfileComponent implements OnInit {
     this.validationService.setValidationMessages({
       avatarFromUrl: {
         required: 'A URL is required',
-        pattern: 'Please make input is avalid URL'
+        pattern: 'Please make sure the input is a avalid URL'
       }
     });
 

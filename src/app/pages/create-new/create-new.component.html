@@ -1,22 +1,18 @@
 <h1 class="ws-mb-6">Create new listing</h1>
 
 <div class="body ws-mb-6">
-  <form>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="grid-wrapper">
       <div class="flex-col title-col">
-        <ws-input
-          class="ws-mb-1 title"
-          type="text"
-          label="Title"
-          name="title"
-          id="title"
-          [showBorder]="true"
-          #titleInput>
-        </ws-input>
+        <div>
+          <label for="title">Title</label>
+          <input class="ws-input__text" type="text" name="title" id="title" formControlName="title">
+          <p *ngIf="validationMessage.title" class="ws-input-error-message">{{validationMessage.title}}</p>
+        </div>
 
         <div class="select ws-mt-2">
           <label for="category" class="select__label ws-label-text--placeholder ws-input__label" [class.active]="active || focused">Category</label>
-          <select class="select__bar" name="category" id="category" (focus)="onFocus()" (blur)="onBlur()" #categoryInput>
+          <select class="select__bar" name="category" id="category" (focus)="onFocus()" (blur)="onBlur()" formControlName="category">
             <option value="">- Category -</option>
             <option value="ws-red">Red</option>
             <option value="ws-white">White</option>
@@ -27,53 +23,38 @@
           </select>
           <span class="select__arrow"><i class="fa-solid fa-sort-down"></i></span>
         </div>
+          <p *ngIf="validationMessage.category" class="ws-input-error-message">{{validationMessage.category}}</p>
       </div>
       <div class="flex-col">
-          <div class="date">
-            <div class="date__col date-wrapper">
-              <label>End date</label>
-              <input class="date__date" type="date" #dateInput>
-              <i class="date__icon--calendar fa-solid fa-calendar"></i>
-            </div>
-            <div class="date__row">
-              <div class="date__col">
-                <label>Hour</label>
-                <input class="date__time" type="text" #hourInput>
-              </div>
-              <div class="date__col">
-                <label>Min</label>
-                <input class="date__time" type="text" #minInput>
-              </div>
-            </div>
-          </div>
+        <div>
+          <label for="date">End time</label>
+          <input
+            class="ws-input__text"
+            type="datetime-local"
+            name="date"
+            id="date"
+            min="{{minTime}}"
+            max="{{maxTime}}"
+            formControlName="date">
+          <p *ngIf="validationMessage.date" class="ws-input-error-message">{{validationMessage.date}}</p>
+        </div>
 
-
-        <ws-input
-          class="ws-mb-1"
-          type="text"
-          label="Photo url"
-          name="photo"
-          id="photo"
-          [showBorder]="true"
-          #photoInput>
-        </ws-input>
+        <div>
+          <label for="photo">Photo</label>
+          <input class="ws-input__text" type="url" name="photo" id="photo" formControlName="photo">
+          <p *ngIf="validationMessage.photo" class="ws-input-error-message">{{validationMessage.photo}}</p>
+        </div>
       </div>
     </div>
 
     <div class="grid-wrapper">
       <div class="flex-col">
-        <ws-input
-          class="ws-mb-1"
-          type="textarea"
-          label="Description"
-          name="description"
-          id="description"
-          [showBorder]="true"
-          #descriptionInput>
-        </ws-input>
+          <label for="description">Description</label>
+          <textarea class="ws-input__text" type="text" name="description" id="description" formControlName="description"></textarea>
+          <p *ngIf="validationMessage.description" class="ws-input-error-message">{{validationMessage.description}}</p>
       </div>
 
-      <button ws-button type="submit" class="btn ws-center-button-x" (click)="onSubmit($event)">Save & publish</button>
+      <button ws-button type="submit" class="btn ws-center-button-x">Save & publish</button>
     </div>
   </form>
 </div>
