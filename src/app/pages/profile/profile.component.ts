@@ -120,8 +120,8 @@ export class ProfileComponent implements OnInit {
       return
     }
     this.dataService.updateAvatar(this.avatarFormFromUrl.controls['avatarFromUrl'].value).subscribe({
-      next: (response: any) => {alert('Avatar image updated')},
-      error: (error: any) => {alert('Something went wrong')}
+      next: (response: any) => alert('Avatar image updated'),
+      error: (error: any) => this.dataService.alertError(error)
     });
   }
 
@@ -132,8 +132,8 @@ export class ProfileComponent implements OnInit {
       return
     }
     this.dataService.updateAvatar(this.activeAvatar.src).subscribe({
-      next: (response: any) => {alert('Avatar image updated')},
-      error: (error: any) => {alert('Something went wrong')}
+      next: (response: any) => alert('Avatar image updated'),
+      error: (error: any) => this.dataService.alertError(error)
     });
 
   }

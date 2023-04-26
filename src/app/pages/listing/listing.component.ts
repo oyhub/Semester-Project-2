@@ -166,7 +166,7 @@ export class ListingComponent implements OnInit {
 
     this.dataService.bidOnListing(this.id, bidToSend).subscribe({
       next: () => {},
-      error: (error: any) => {console.log(error)},
+      error: (error: any) => {this.dataService.alertError(error)},
       complete: () => {console.log("bid added")}
     });
   }

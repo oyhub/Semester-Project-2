@@ -9,6 +9,7 @@ import {UserService} from "./user.service";
 import {Register} from "../models/register.model";
 import {Observable} from "rxjs";
 import {CreateNew} from "../models/createNew.model";
+import {Router} from "@angular/router";
 
 let httpOptions = {
   headers: new HttpHeaders({
@@ -33,7 +34,8 @@ export class DataService {
     private http: HttpClient,
     private storageService: StorageService,
     private modalService: ModalService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {
     this.loginUrl = constants.BASE_URL + constants.LOGIN_URL;
     this.registerUrl = constants.BASE_URL + constants.REGISTER_URL;
@@ -43,6 +45,22 @@ export class DataService {
     this.listingsLimit = constants.LISTINGS_LIMIT;
 
     this.modalService.showModal$.subscribe(show => this.showModal = show);
+  }
+
+  alertError(error): void {
+    console.log(error)
+    const errorArr = error.error.errors;
+    if (errorArr && errorArr.length > 0) {
+      const errorMessages = errorArr.map(error => error.message);
+      console.log(errorMessages)
+      const errorMessageString = errorMessages.join('\n');
+      alert(errorMessageString)
+      if(errorMessageString.includes('No listing with such ID')) {
+        this.router.navigateByUrl('/');
+      }
+    } else {
+      alert(error)
+    }
   }
 
   getAuth(login: Login): void{
@@ -57,8 +75,7 @@ export class DataService {
           console.log(response)
         },
         error: (error: any) => {
-          // Fix error
-          console.error('Error occurred:', error);
+          this.alertError(error);
         },
         complete: () => {
           this.modalService.closeModal();
@@ -72,11 +89,9 @@ export class DataService {
       .pipe(retry(1))
       .subscribe({
         next: (response: any) => {
-          console.log(response)
         },
         error: (error: any) => {
-          // Fix error
-          console.error('Error occurred:', error);
+          this.alertError(error);
         },
         complete: () => {
           this.modalService.closeModal();

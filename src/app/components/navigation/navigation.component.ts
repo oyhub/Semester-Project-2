@@ -38,9 +38,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
   @ViewChild('register', { static: true }) registerTemplate;
   @ViewChild('emailInput') email: InputComponent;
   @ViewChild('passwordInput') password: InputComponent;
-  // @ViewChild('regEmailInput') regEmail: InputComponent;
-  // @ViewChild('regPasswordInput') regPassword: InputComponent;
-  // @ViewChild('regUsernameInput') regUsername: InputComponent;
 
 
   constructor(
@@ -78,7 +75,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
     this.regForm = this.formBuilder.group({
       regEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$')]],
-      regUsername: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\s]+$')]],
+      regUsername: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_\s]+$')]],
       regPassword: ['', [Validators.required, Validators.pattern('^[^\\s]+$'), Validators.minLength(6)]]
     });
 
@@ -153,13 +150,11 @@ export class NavigationComponent implements OnInit, OnDestroy {
       this.regValidationMessage = this.validationService.getValidationMessages(this.regForm);
       return
     }
-
     const register: Register = {
-      name: this.regForm.controls['regName'].value,
+      name: this.regForm.controls['regUsername'].value,
       email: this.regForm.controls['regEmail'].value,
       password: this.regForm.controls['regPassword'].value
     }
-
     this.dataService.register(register);
   }
 

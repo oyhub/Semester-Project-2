@@ -63,7 +63,7 @@ export class CreateNewComponent implements OnInit {
 
     this.dataService.postListing(this.data).subscribe({
       next: (response: any) => {console.log(response)},
-      error: (error: any) => {console.log(error)},
+      error: (error: any) => {this.dataService.alertError(error)},
       complete: () => {console.log("listing added")}
     });
   }
