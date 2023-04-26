@@ -31,7 +31,6 @@ export class ValidationService {
     Object.keys(formGroup.controls).forEach(key => {
       const control = formGroup.get(key);
       const errors = control.errors;
-
       if (errors) {
         messages[key] = Object.keys(errors)
           .map(errorKey => this.validationMessages[key]?.[errorKey] ?? `Error key ${errorKey} is missing for control ${key}`)

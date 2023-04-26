@@ -33,6 +33,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
   regForm: FormGroup;
   regValidationMessage: any;
 
+  //Login form variables
+  loginForm: FormGroup;
+  loginValidationMessage: any;
+
   @ViewChild('login', { static: true }) loginTemplate;
   @ViewChild('logout', { static: true }) logoutTemplate;
   @ViewChild('register', { static: true }) registerTemplate;
@@ -73,10 +77,16 @@ export class NavigationComponent implements OnInit, OnDestroy {
       }
     );
 
+
     this.regForm = this.formBuilder.group({
       regEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$')]],
       regUsername: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_\s]+$')]],
       regPassword: ['', [Validators.required, Validators.pattern('^[^\\s]+$'), Validators.minLength(6)]]
+    });
+
+    this.loginForm = this.formBuilder.group({
+      loginEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$')]],
+      loginPassword: ['', Validators.required]
     });
 
     this.validationService.setValidationMessages({
@@ -91,19 +101,28 @@ export class NavigationComponent implements OnInit, OnDestroy {
       regPassword: {
         required: 'You need to fill in a password',
         pattern: 'The password can not contain any spaces',
-        minLength: 'The password must be 6 or more characters'
+        minlength: 'The password must be 6 or more characters'
+      },
+      loginEmail: {
+        required: 'You need to fill in a email adress',
+        pattern: 'You need to fill in a valid @stud.noroff.no email adress'
+      },
+      loginPassword: {
+        required: 'You need to fill in a password'
       }
     });
     this.regValidationMessage = this.validationService.resetValidationMessages(this.regForm);
-
-    // this.regForm.valueChanges.pipe(debounceTime(1200)).subscribe(value => {
-    //   console.log(value)
-    //   this.regValidationMessage = this.validationService.getValidationMessages(this.regForm);
-    // });
+    this.loginValidationMessage = this.validationService.resetValidationMessages(this.loginForm);
 
     this.validationService.trackFieldChanges(this.regForm, (fieldName, validationMessage) => {
       this.regValidationMessage[fieldName] = validationMessage;
     });
+    this.validationService.trackFieldChanges(this.loginForm, (fieldName, validationMessage) => {
+      this.loginValidationMessage[fieldName] = validationMessage;
+    });
+
+
+
 
   }
 
@@ -129,23 +148,22 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.modalService.openModal();
   }
 
-  onLogin(event) {
-    event.preventDefault();
-
-    if (!this.email.inputValue || !this.password.inputValue) {
-      alert('Please write login details');
+  onLogin() {
+    if (this.loginForm.status === 'INVALID') {
+      this.loginValidationMessage = this.validationService.getValidationMessages(this.loginForm);
       return;
     }
 
     const login: Login = {
-      email: this.email.inputValue.trim(),
-      password: this.password.inputValue.trim()
+      email: this.loginForm.controls['loginEmail'].value,
+      password: this.loginForm.controls['loginPassword'].value
     };
 
    this.dataService.getAuth(login);
   }
 
   onRegister() {
+    console.log(this.regForm)
     if (this.regForm.status === 'INVALID'){
       this.regValidationMessage = this.validationService.getValidationMessages(this.regForm);
       return
