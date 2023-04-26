@@ -109,12 +109,17 @@ export class ListingComponent implements OnInit {
 
     this.latestBids = listing.bids.slice(-3).reverse();
 
+    this.updateValidators()
+  }
+
+  updateValidators() {
     this.bidForm.controls['bidInput'].setValidators([
       Validators.required,
       Validators.pattern(/^\d+$/),
       bidToLow(this.highBid),
       notEnoughCredit(this.creditsLeft, this.highBid)
     ]);
+
     this.bidForm.controls['bidInput'].updateValueAndValidity();
   }
 
@@ -170,6 +175,7 @@ export class ListingComponent implements OnInit {
 
   private addCoins(user) {
     this.creditsLeft = user.credits;
+    this.updateValidators()
   }
 
   onBid() {
