@@ -18,7 +18,7 @@
       <ng-container *ngIf="!ended && user !== listing.seller.name">
       <h2 class="ws-h3 ws-mb-2">Bid on this item</h2>
       <p *ngIf="noBidPlaced" class="ws-mb-2">Be the first to bid on this item</p>
-      <form class="ws-mb-2" (ngSubmit)="onBid()">
+      <form [formGroup]="bidForm" class="ws-mb-2" (ngSubmit)="onBid()">
         <div class="bid-container">
           <span class="bid-currency">$</span>
           <input
@@ -27,10 +27,12 @@
             name=""
             id=""
             value="{{bidValue}}"
-            (focus)="resetValue($event)"
+            formControlName="bidInput"
             #bidInput>
           <button class="bid-btn ws-reset-button" type="submit">Bid</button>
         </div>
+        <p *ngIf="bidValidationMessage.bidInput" class="ws-mt-2 ws-input-error-message">{{bidValidationMessage.bidInput}}</p>
+
       </form>
       <p class="ws-mb-6 ws-bold">You have ${{creditsLeft}} left</p>
       </ng-container>

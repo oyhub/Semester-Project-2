@@ -4,6 +4,8 @@ import {DataService} from "../../services/data.service";
 import {differenceInDays, differenceInHours, differenceInMinutes, differenceInMonths, format} from "date-fns";
 import {StorageService} from "../../services/storage.service";
 import {CategoryService} from "../../services/category.service";
+import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from "@angular/forms";
+import {ValidationService} from "../../services/validation.service";
 
 @Component({
   selector: 'ws-wine',
@@ -29,12 +31,17 @@ export class ListingComponent implements OnInit {
   user: string;
   latestBids: any;
 
+  bidForm: FormGroup;
+  bidValidationMessage: any;
+
   @ViewChild('bidInput', { static: false }) bidInput: ElementRef;
 
   constructor(private route: ActivatedRoute,
               private dataService: DataService,
               private storageService: StorageService,
-              private categoryService: CategoryService) { }
+              private categoryService: CategoryService,
+              private formBuilder: FormBuilder,
+              private validationService: ValidationService) { }
 
   ngOnInit(): void {
     this.user = this.storageService.getUser();
@@ -58,6 +65,25 @@ export class ListingComponent implements OnInit {
         console.log(error)
       }
     });
+
+    this.bidForm = this.formBuilder.group({
+      bidInput: ['', [Validators.required, Validators.pattern(/^\d+$/)]]
+    })
+
+    this.validationService.setValidationMessages({
+      bidInput: {
+        required: 'You need to fill in a value to bid',
+        pattern: 'Bids need to be a number',
+        notEnoughCredit: 'You do not have enough credits to bid on this',
+        bidToLow: 'The bid needs to be higher than existing bid'
+      }
+    });
+
+    this.bidValidationMessage = this.validationService.resetValidationMessages(this.bidForm);
+
+    this.validationService.trackFieldChanges(this.bidForm, (fieldName, validationMessage) => {
+      this.bidValidationMessage[fieldName] = validationMessage;
+    })
   }
 
   buildData(listing) {
@@ -77,24 +103,24 @@ export class ListingComponent implements OnInit {
     this.seller = listing.seller.name.replace(/_/g, " ");
     this.title = this.formatTitle(listing.title);
 
-    this.bidValue = 10;
+    this.bidForm.controls['bidInput'].setValue(10);
     if(this.highBid) {
-      this.bidValue = this.highBid + 10;
+      this.bidForm.controls['bidInput'].setValue(this.highBid + 10);
     }
 
     this.latestBids = listing.bids.slice(-3).reverse();
+
+    this.bidForm.controls['bidInput'].setValidators([
+      Validators.required,
+      Validators.pattern(/^\d+$/),
+      bidToLow(this.highBid),
+      notEnoughCredit(this.creditsLeft, this.highBid)
+    ]);
+    this.bidForm.controls['bidInput'].updateValueAndValidity();
   }
 
   imageLoadError(): void {
     this.image = "assets/images/wine-bottle-placeholder.jpg"
-  }
-
-  resetValue(event: FocusEvent): void {
-    const inputElement = event.target as HTMLInputElement;
-    if (parseInt(inputElement.value) === this.bidValue && !this.bidChanged) {
-      inputElement.value = "";
-      this.bidChanged = true;
-    }
   }
 
   getRemainingTime(endDate: string): string {
@@ -148,30 +174,43 @@ export class ListingComponent implements OnInit {
   }
 
   onBid() {
-    const bid = parseInt(this.bidInput.nativeElement.value.trim());
-
-    if(!bid || isNaN(bid)){
-    alert('Please place a valid bid');
-    return
+    console.log(this.bidValidationMessage.bidInput)
+    if (this.bidForm.status === 'INVALID'){
+      this.bidValidationMessage = this.validationService.getValidationMessages(this.bidForm);
+      return
     }
 
-    if(bid <= this.highBid) {
-      alert('Bid must be higher than existing bid')
-      return;
+    const bid = {
+      "amount": this.bidForm.controls['bidInput'].value
     }
 
-    const bidToSend = {
-      "amount": bid
-    }
-
-    this.dataService.bidOnListing(this.id, bidToSend).subscribe({
+    this.dataService.bidOnListing(this.id, bid).subscribe({
       next: () => {},
-      error: (error: any) => {this.dataService.alertError(error)},
-      complete: () => {console.log("bid added")}
+      error: (error: any) => this.dataService.alertError(error),
+      complete: () => alert('bid added')
     });
   }
 
   bidderName(bid: any) {
     return this.formatTitle(bid.bidderName.replace(/_/g, " "));
   }
+}
+
+// Custom validators
+function notEnoughCredit(credits: any, highBid: number): ValidatorFn {
+  return (control: AbstractControl): {[key: string]: boolean} | null => {
+    if (credits < highBid || control.value < highBid) {
+      return {'notEnoughCredit': true}
+    }
+    return null;
+  };
+}
+
+function bidToLow(highBid: number): ValidatorFn {
+  return (control: AbstractControl): {[key: string]: boolean} | null => {
+    if (control.value < highBid) {
+      return { 'bidToLow': true }
+    }
+    return null;
+  };
 }

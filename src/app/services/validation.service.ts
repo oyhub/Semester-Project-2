@@ -26,18 +26,18 @@ export class ValidationService {
   }
 
   getValidationMessages(formGroup: FormGroup): any {
-    const messages = this.resetValidationMessages(formGroup);
+    const message = this.resetValidationMessages(formGroup);
 
     Object.keys(formGroup.controls).forEach(key => {
       const control = formGroup.get(key);
       const errors = control.errors;
       if (errors) {
-        messages[key] = Object.keys(errors)
-          .map(errorKey => this.validationMessages[key]?.[errorKey] ?? `Error key ${errorKey} is missing for control ${key}`)
-          .join(' ');
+        const firstErrorKey = Object.keys(errors)[0];
+        message[key] = this.validationMessages[key]?.[firstErrorKey] ?? `Error key ${firstErrorKey} is missing for control ${key}`;
       }
     });
-    return messages;
+
+    return message;
   }
 
   trackFieldChanges(formGroup: FormGroup, onFieldChange: (fieldName: string, validationMessage: string) => void): void {
