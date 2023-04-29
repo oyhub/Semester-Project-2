@@ -14,7 +14,7 @@
         <p>Provide your own avatar, with an active url to the image</p>
         <form [formGroup]="avatarFormFromUrl" (ngSubmit)="updateAvatar()">
           <div>
-            <input type="url" name="" id="" class="ws-input__url" formControlName="avatarFromUrl">
+            <input type="url" name="" id="" class="ws-input__input" formControlName="avatarFromUrl">
             <p *ngIf="validationMessage.avatarFromUrl" class="ws-input-error-message ws-mb-2">{{validationMessage.avatarFromUrl}}</p>
           </div>
           <button ws-button type="submit">Update avatar</button>

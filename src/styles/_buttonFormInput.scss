@@ -61,18 +61,8 @@ textarea:focus{
     transition: all 80ms ease;
   }
 
-  &__text,
-  &__email,
-  &__password,
-  &__textarea,
-  &__date,
-  &__url,
-  &__text:active,
-  &__email:active,
-  &__password:active,
-  &__textarea:active,
-  &__date:active,
-  &__url:active{
+  &__input,
+  &__input:active {
     width: 100%;
     padding: 0.85rem;
     background-color: $color-gray;
@@ -86,6 +76,10 @@ textarea:focus{
     &:focus {
       outline: $color-primary 2px solid;
     }
+  }
+
+  &--no-border {
+    border-color: transparent;
   }
 }
 

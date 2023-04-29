@@ -45,12 +45,12 @@
   <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
     <div>
       <label for="loginEmail">Email:</label>
-      <input class="ws-input__text" type="email" name="email" id="loginEmail" formControlName="loginEmail">
+      <input class="ws-input__input ws-input--no-border" type="email" name="email" id="loginEmail" formControlName="loginEmail">
       <p *ngIf="loginValidationMessage.loginEmail" class="ws-input-error-message">{{loginValidationMessage.loginEmail}}</p>
     </div>
     <div>
       <label for="loginPassword">Password:</label>
-      <input class="ws-input__text" type="password" name="password" id="loginPassword" formControlName="loginPassword">
+      <input class="ws-input__input ws-input--no-border" type="password" name="password" id="loginPassword" formControlName="loginPassword">
       <p *ngIf="loginValidationMessage.loginPassword" class="ws-input-error-message">{{loginValidationMessage.loginPassword}}</p>
     </div>
     <button ws-button class="ws-my-5 ws-center-button-x" type="submit">Login</button>
@@ -71,17 +71,17 @@
   <form [formGroup]="regForm" (ngSubmit)="onRegister()">
     <div>
       <label for="regEmail">Email:</label>
-      <input class="ws-input__text" type="email" name="email" id="regEmail" formControlName="regEmail">
+      <input class="ws-input__input ws-input--no-border" type="email" name="email" id="regEmail" formControlName="regEmail">
       <p *ngIf="regValidationMessage.regEmail" class="ws-input-error-message">{{regValidationMessage.regEmail}}</p>
     </div>
     <div>
       <label for="regUsername">Username:</label>
-      <input class="ws-input__text" type="text" name="username" id="regUsername" formControlName="regUsername">
+      <input class="ws-input__input ws-input--no-border" type="text" name="username" id="regUsername" formControlName="regUsername">
       <p *ngIf="regValidationMessage.regUsername" class="ws-input-error-message">{{regValidationMessage.regUsername}}</p>
     </div>
     <div>
       <label for="regPassword">Password:</label>
-      <input class="ws-input__text" type="password" name="password" id="regPassword" formControlName="regPassword">
+      <input class="ws-input__input ws-input--no-border" type="password" name="password" id="regPassword" formControlName="regPassword">
       <p *ngIf="regValidationMessage.regPassword" class="ws-input-error-message">{{regValidationMessage.regPassword}}</p>
     </div>
     <button ws-button class="ws-my-5 ws-center-button-x" type="submit">Register</button>

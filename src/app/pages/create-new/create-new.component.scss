@@ -14,92 +14,18 @@ border-bottom: 2px solid $color-primary;
   }
 }
 
-.title-col {
-  @media only screen and (min-width: $screen-md){
-    margin-top: 1.2rem;
-  }
-}
-.date {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 0.5rem 0;
-  margin-bottom: 0.3rem;
-
-  @media only screen and (min-width: $screen-sm) {
-    flex-direction: row;
-  }
-
-  & label{
-    @extend .ws-label-text;
-    padding-bottom: 0.4rem;
-  }
-
-  &__col {
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__row {
-    display: flex;
-    gap: 1.5rem;
-  }
-
-  &__date {
-    padding: 0.75rem;
-    background-color: $color-gray;
-    outline: transparent;
-    border: 1px solid $color-primary;
-    border-radius: 10px;
-    color: $color-netural;
-    width: 100%;
-    position: relative;
-    font-family: $font-paragraph;
-  }
-
-  &__time {
-    padding: 0.85rem;
-    background-color: $color-gray;
-    outline: transparent;
-    border: 1px solid $color-primary;
-    border-radius: 10px;
-    color: $color-netural;
-    width: 4rem;
-  }
-
-  &__date:focus,
-  &__date:active,
-  &__time:focus,
-  &__time:active {
-    outline: 2px solid $color-primary;
-  }
-
-  &__icon{
-    &--calendar {
-      position: absolute;
-      display: inline-block;
-      right: 0.95rem;
-      bottom: 0.9rem;
-      padding: 0.1rem;
-      background-color: $color-gray;
-      color: $color-primary;
-      pointer-events: none;
-    }
-  }
-}
-
-.date-wrapper {
-  position: relative;
-}
-
 .btn {
-  margin-top: 0.7rem;
-  align-self: flex-start;
+  margin-top: 2.5rem;
+  width: 100%;
 }
 
 .select {
- position: relative;
+  margin-bottom: 0.7rem;
 
+  &__container {
+    position: relative;
+    margin-top: 0.7rem;
+  }
   &__arrow {
     position: absolute;
     top: 0;
@@ -124,7 +50,7 @@ border-bottom: 2px solid $color-primary;
 
   &__bar {
     width: 100%;
-    padding: 0.7rem;
+    padding: 0.85rem;
     background-color: $color-gray;
     outline: transparent;
     border: 1px solid $color-primary;
@@ -144,35 +70,28 @@ border-bottom: 2px solid $color-primary;
       z-index: -1;
     }
   }
+}
 
+.date {
+  position: relative;
 
-  &__label {
-    top: -0.6rem;
-    left: 0.8rem;
-    transform: translateY(100%);
-    font-size: 0.75rem;
-    color: $color-netural;
-    padding: 0 0.5rem;
-    z-index: 2;
-    isolation: isolate;
-    opacity: 0;
-    transition: opacity 80ms ease, transform 80ms ease;
-
-    &:before {
-      content: "";
-      position: absolute;
-      top: 0.45rem;
-      left: 0;
-      background-color: $color-gray;
-      height: 100%;
-      width: 100%;
-      z-index: -1;
-    }
-
-    &.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  & input {
+    font-family: $font-paragraph;
   }
+
+  & .fa-calendar{
+    color: $color-primary;
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+}
+
+textarea {
+  height: 15.8rem;
+  font-family: $font-paragraph;
+  font-weight: 300;
 }
 
