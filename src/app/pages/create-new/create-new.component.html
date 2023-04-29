@@ -3,7 +3,7 @@
 <div class="body ws-mb-6">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="grid-wrapper">
-      <div class="flex-col">
+      <div>
         <div class="ws-mb-3">
           <label for="title">Title</label>
           <input class="ws-input__input" type="text" name="title" id="title" formControlName="title">
@@ -52,10 +52,12 @@
 
 
       <div class="flex-col">
-        <label for="description">Description</label>
-        <textarea class="ws-input__input" type="text" name="description" id="description" formControlName="description"></textarea>
-        <p *ngIf="validationMessage.description" class="ws-input-error-message">{{validationMessage.description}}</p>
-        <button ws-button type="submit" class="btn ws-center-button-x">Save & publish</button>
+        <div>
+          <label for="description">Description</label>
+          <textarea class="ws-input__input" type="text" name="description" id="description" formControlName="description"></textarea>
+          <p *ngIf="validationMessage.description" class="ws-input-error-message">{{validationMessage.description}}</p>
+        </div>
+        <button ws-button type="submit" class="btn ws-center-button-x" [class.btn--extra-mb]="validationMessage.photo">Save & publish</button>
       </div>
     </div>
   </form>
