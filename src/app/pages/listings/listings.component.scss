@@ -19,14 +19,13 @@
 .filter {
   grid-column: -1 / 1;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat( auto-fit, minmax(30rem, 1fr) );
   gap: 2rem;
   align-items: center;
 }
 
 .category {
   display: flex;
-  gap: 1rem;
   justify-content: space-between;
 }
 .search {

@@ -5,12 +5,24 @@
       <input type="text" name="search" id="search" class="ws-input__input ws-input--no-border" [formControl]="search">
     </div>
     <div class="category" #category>
-      <span (click)="onGetCategory($event, 'ws-red')" class="ws-category-text">Red</span>
-      <span (click)="onGetCategory($event, 'ws-white')" class="ws-category-text">White</span>
-      <span (click)="onGetCategory($event, 'ws-rose')" class="ws-category-text">Rosé</span>
-      <span (click)="onGetCategory($event, 'ws-dessert')" class="ws-category-text">Dessert</span>
-      <span (click)="onGetCategory($event, 'ws-champagne')" class="ws-category-text">Champagne</span>
-      <span (click)="onGetCategory($event, 'ws-sparkeling')" class="ws-category-text">Other Sparkeling</span>
+      <span (click)="onGetCategory($event)" data-category="ws-red" class="ws-category-text">Red</span>
+      <span (click)="onGetCategory($event)" data-category="ws-white" class="ws-category-text">White</span>
+      <span (click)="onGetCategory($event)" data-category="ws-rose" class="ws-category-text">Rosé</span>
+      <span (click)="onGetCategory($event)" data-category="ws-dessert" class="ws-category-text">Dessert</span>
+      <span (click)="onGetCategory($event)" data-category="ws-champagne" class="ws-category-text">Champagne</span>
+      <span (click)="onGetCategory($event)" data-category="ws-sparkling" class="ws-category-text">Other Sparkling</span>
+    </div>
+    <div class="select__container">
+      <select class="select__bar" name="category" id="category" (change)="selectChange($event)" #select>
+        <option value="">- Select a category -</option>
+        <option value="ws-red">Red</option>
+        <option value="ws-white">White</option>
+        <option value="ws-rose">Rosé</option>
+        <option value="ws-dessert">Dessert</option>
+        <option value="ws-champagne">Champagne</option>
+        <option value="ws-sparkling">Other Sparkling</option>
+      </select>
+      <span class="select__arrow"><i class="fa-solid fa-sort-down"></i></span>
     </div>
   </div>
   <ng-container *ngFor="let listing of listingsToshow">

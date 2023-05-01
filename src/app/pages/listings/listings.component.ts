@@ -20,6 +20,7 @@ export class ListingsComponent implements OnInit {
   listingsToshow: any[];
 
   @ViewChild('category', {static: true}) category: ElementRef;
+  @ViewChild('select', {static: true}) select: ElementRef;
 
   constructor(
     private dataService: DataService,
@@ -72,13 +73,47 @@ export class ListingsComponent implements OnInit {
     })
   }
 
-  onGetCategory(event, category) {
+  onGetCategory(event, fromSelect = false) {
+    console.log(event)
+    let category: string;
+    if (fromSelect) {
+      category = event;
+    } else {
+      category = event.target.getAttribute('data-category');
+    }
+
+    //Go through span's
     const categories = this.category.nativeElement.querySelectorAll('span');
     categories.forEach((cat) => {
       cat.classList.remove('active')
+      if (category === cat.getAttribute('data-category')) {
+        cat.classList.add('active')
+      }
+    });
+
+    //Go through select
+    this.select.nativeElement.value = category;
+    const options = this.select.nativeElement.querySelectorAll('option');
+    options.forEach((option) => {
+      option.classList.remove('active');
+      if (category === option.value) {
+        option.classList.add('active')
+      }
     })
-    event.target.classList.add('active')
     this.categoryListings = [];
     this.getCategory(category)
+  }
+
+
+  // onFocus() {
+  //   this.focused = true;
+  // }
+  //
+  // onBlur() {
+  //   this.focused = false;
+  //   this.active = this.form.controls['category'].value ? true : false;
+  // }
+  selectChange(event) {
+    this.onGetCategory(event.target.value, true)
   }
 }
