@@ -18,6 +18,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { CreateNewComponent } from './pages/create-new/create-new.component';
 import { ListingComponent } from './pages/listing/listing.component';
 import { AuthGuard } from "./guards/auth.guard";
+import { RefreshPageDirective } from './directives/refresh-page.directive';
 
 const routes: Routes = [
   {
@@ -59,7 +60,8 @@ const routes: Routes = [
     CardComponent,
     ProfileComponent,
     CreateNewComponent,
-    ListingComponent
+    ListingComponent,
+    RefreshPageDirective
   ],
   imports: [
     BrowserModule,

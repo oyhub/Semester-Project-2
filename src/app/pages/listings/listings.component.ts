@@ -35,7 +35,7 @@ export class ListingsComponent implements OnInit {
       if (!value) {
         this.listingsToshow = this.listings;
       }
-    })
+    });
   }
 
   getListings(listingOffset: number = 0) {
