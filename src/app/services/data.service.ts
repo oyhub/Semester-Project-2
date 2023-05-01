@@ -104,6 +104,12 @@ export class DataService {
     return this.http.get(listingsUrl, httpOptions).pipe(retry(2));
   }
 
+  getListingsByCat(category) {
+    const listingsUrl = `${this.listingsUrl}&_tag=${category}&sort=created`
+    return this.http.get(listingsUrl, httpOptions).pipe(retry(2));
+
+  }
+
   getSpecificListing(id: string): Observable<any> {
     const listingUrl = `${this.specificUrl}/${id}${this.constants.SPECIFIC_OPTIONS}`;
     return this.http.get(listingUrl, httpOptions).pipe(retry(2));

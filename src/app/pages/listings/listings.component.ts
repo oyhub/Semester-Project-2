@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {DataService} from "../../services/data.service";
 import { Constants } from '../../app.constants';
 import {FormControl} from "@angular/forms";
@@ -9,13 +9,17 @@ import {FormControl} from "@angular/forms";
   styleUrls: ['./listings.component.scss']
 })
 export class ListingsComponent implements OnInit {
+  categoryListings: any[] = [];
   listings: any[] = [];
   listingOffset: number = 0;
   listingsLimit: number;
   moreToLoad: boolean = false;
+  moreToLoadCategory: boolean = false;
 
   search = new FormControl;
   listingsToshow: any[];
+
+  @ViewChild('category', {static: true}) category: ElementRef;
 
   constructor(
     private dataService: DataService,
@@ -56,4 +60,25 @@ export class ListingsComponent implements OnInit {
     this.getListings((this.listingOffset));
   }
 
+  getCategory(category) {
+    this.dataService.getListingsByCat(category).subscribe({
+      next: (response: any) => {
+        this.categoryListings = [...this.categoryListings, ...response];
+        this.listingsToshow = this.categoryListings;
+      },
+      error: (error: any) => {
+        alert(error);
+    }
+    })
+  }
+
+  onGetCategory(event, category) {
+    const categories = this.category.nativeElement.querySelectorAll('span');
+    categories.forEach((cat) => {
+      cat.classList.remove('active')
+    })
+    event.target.classList.add('active')
+    this.categoryListings = [];
+    this.getCategory(category)
+  }
 }

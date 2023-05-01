@@ -1,7 +1,17 @@
 <div class="container ws-mb-4">
-  <div class="search">
-    <label for="search">Search:</label>
-    <input type="text" name="search" id="search" class="ws-input__input ws-input--no-border" [formControl]="search">
+  <div class="filter">
+    <div class="search">
+      <label for="search">Search:</label>
+      <input type="text" name="search" id="search" class="ws-input__input ws-input--no-border" [formControl]="search">
+    </div>
+    <div class="category" #category>
+      <span (click)="onGetCategory($event, 'ws-red')" class="ws-category-text">Red</span>
+      <span (click)="onGetCategory($event, 'ws-white')" class="ws-category-text">White</span>
+      <span (click)="onGetCategory($event, 'ws-rose')" class="ws-category-text">Rosé</span>
+      <span (click)="onGetCategory($event, 'ws-dessert')" class="ws-category-text">Dessert</span>
+      <span (click)="onGetCategory($event, 'ws-champagne')" class="ws-category-text">Champagne</span>
+      <span (click)="onGetCategory($event, 'ws-sparkeling')" class="ws-category-text">Other Sparkeling</span>
+    </div>
   </div>
   <ng-container *ngFor="let listing of listingsToshow">
     <a class="link-unset" [routerLink]="['/listing', listing.id]">

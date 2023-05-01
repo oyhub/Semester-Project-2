@@ -85,6 +85,17 @@ a {
   font-family: $font-heading;
   font-size: 0.938rem;
   font-weight: 400;
+
+  &:hover {
+    cursor: pointer;
+    color: $color-secondary;
+    text-decoration: underline;
+  }
+
+  &.active {
+    color: $color-primary;
+    text-decoration: underline;
+  }
 }
 
 .ws-cta-text {

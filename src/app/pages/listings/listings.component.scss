@@ -16,13 +16,22 @@
   }
 }
 
+.filter {
+  grid-column: -1 / 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.category {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
 .search {
   display: flex;
   align-items: center;
   gap: 2rem;
-  grid-column: -1 / 1;
 
-  @media only screen and (min-width: $screen-md){
-    width: 50%;
-  }
 }
