@@ -15,8 +15,6 @@ export class ListingsComponent implements OnInit {
   moreToLoad: boolean = false;
 
   search = new FormControl;
-  filterListings: any[];
-
   listingsToshow: any[];
 
   constructor(
