@@ -12,8 +12,8 @@
       <span (click)="onGetCategory($event)" data-category="ws-champagne" class="ws-category-text">Champagne</span>
       <span (click)="onGetCategory($event)" data-category="ws-sparkling" class="ws-category-text">Other Sparkling</span>
     </div>
-    <div class="select__container">
-      <select class="select__bar" name="category" id="category" (change)="selectChange($event)" #select>
+    <div class="ws-select__container">
+      <select class="ws-select__bar" name="category" id="category" (change)="selectChange($event)" #select>
         <option value="">- Select a category -</option>
         <option value="ws-red">Red</option>
         <option value="ws-white">White</option>
@@ -22,7 +22,7 @@
         <option value="ws-champagne">Champagne</option>
         <option value="ws-sparkling">Other Sparkling</option>
       </select>
-      <span class="select__arrow"><i class="fa-solid fa-sort-down"></i></span>
+      <span class="ws-select__arrow"><i class="fa-solid fa-sort-down"></i></span>
     </div>
   </div>
   <ng-container *ngFor="let listing of listingsToshow">

@@ -28,59 +28,6 @@ border-bottom: 2px solid $color-primary;
   }
 }
 
-.select {
-  margin-bottom: 0.7rem;
-
-  &__container {
-    position: relative;
-    margin-top: 0.7rem;
-  }
-  &__arrow {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: grid;
-    place-items: center;
-    background-color: $color-primary;
-    height: 100%;
-    width: 2.2rem;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border: 1px solid $color-primary;
-    border-left: 0;
-    pointer-events: none;
-
-    & i {
-      color: $color-dark;
-      transform: translateY(-20%);
-      font-size: 1.6rem;
-    }
-  }
-
-  &__bar {
-    width: 100%;
-    padding: 0.85rem;
-    background-color: $color-gray;
-    outline: transparent;
-    border: 1px solid $color-primary;
-    border-radius: 10px;
-    color: $color-netural;
-    position: relative;
-    font-family: $font-heading;
-    font-size: 0.9375rem;
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    &:focus {
-      outline: 2px solid $color-primary;
-      outline-offset: 0;
-      z-index: -1;
-    }
-  }
-}
-
 .date {
   position: relative;
 

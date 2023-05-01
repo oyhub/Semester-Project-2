@@ -10,10 +10,10 @@
           <p *ngIf="validationMessage.title" class="ws-input-error-message">{{validationMessage.title}}</p>
         </div>
 
-        <div class="select">
+        <div class="ws-select">
           <label for="category">Category</label>
-          <div class="select__container">
-            <select class="select__bar" name="category" id="category" (focus)="onFocus()" (blur)="onBlur()" formControlName="category">
+          <div class="ws-select__container">
+            <select class="ws-select__bar" name="category" id="category" (focus)="onFocus()" (blur)="onBlur()" formControlName="category">
               <option value="">- Select a category -</option>
               <option value="ws-red">Red</option>
               <option value="ws-white">White</option>
@@ -22,7 +22,7 @@
               <option value="ws-champagne">Champagne</option>
               <option value="ws-sparkeling">Other Sparkeling</option>
             </select>
-            <span class="select__arrow"><i class="fa-solid fa-sort-down"></i></span>
+            <span class="ws-select__arrow"><i class="fa-solid fa-sort-down"></i></span>
           </div>
           <p *ngIf="validationMessage.category" class="ws-input-error-message">{{validationMessage.category}}</p>
         </div>
