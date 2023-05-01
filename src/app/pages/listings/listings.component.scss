@@ -1,3 +1,5 @@
+@import "/src/styles/variables";
+
 .container {
   display: grid;
   grid-template-columns: repeat( auto-fit, minmax(15rem, 1fr) );
@@ -11,5 +13,16 @@
   &:hover {
     text-decoration: none;
     cursor: pointer;
+  }
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  grid-column: -1 / 1;
+
+  @media only screen and (min-width: $screen-md){
+    width: 50%;
   }
 }
