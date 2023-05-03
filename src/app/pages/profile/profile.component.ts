@@ -51,15 +51,15 @@ export class ProfileComponent implements OnInit {
     });
 
     this.avatars = [
-      { src: "assets/images/avatar-people/01.png", alt: "Avatar 1" },
-      { src: "assets/images/avatar-people/02.png", alt: "Avatar 2" },
-      { src: "assets/images/avatar-people/03.png", alt: "Avatar 3" },
-      { src: "assets/images/avatar-people/04.png", alt: "Avatar 4" },
-      { src: "assets/images/avatar-people/05.png", alt: "Avatar 5" },
-      { src: "assets/images/avatar-people/06.png", alt: "Avatar 6" },
-      { src: "assets/images/avatar-people/07.png", alt: "Avatar 7" },
-      { src: "assets/images/avatar-people/08.png", alt: "Avatar 8" },
-      { src: "assets/images/avatar-people/09.png", alt: "Avatar 9" }
+      { src: "https://wineseller.netlify.app/assets/images/avatar-people/01.png", alt: "Avatar 1" },
+      { src: "https://wineseller.netlify.app/assets/images/avatar-people/02.png", alt: "Avatar 2" },
+      { src: "https://wineseller.netlify.app/assets/images/avatar-people/03.png", alt: "Avatar 3" },
+      { src: "https://wineseller.netlify.app/assets/images/avatar-people/04.png", alt: "Avatar 4" },
+      { src: "https://wineseller.netlify.app/assets/images/avatar-people/05.png", alt: "Avatar 5" },
+      { src: "https://wineseller.netlify.app/assets/images/avatar-people/06.png", alt: "Avatar 6" },
+      { src: "https://wineseller.netlify.app/assets/images/avatar-people/07.png", alt: "Avatar 7" },
+      { src: "https://wineseller.netlify.app/assets/images/avatar-people/08.png", alt: "Avatar 8" },
+      { src: "https://wineseller.netlify.app/assets/images/avatar-people/09.png", alt: "Avatar 9" }
     ];
 
     this.avatarFormFromUrl = this.formBuilder.group({

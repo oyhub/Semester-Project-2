@@ -13,6 +13,7 @@ export class Constants {
   public readonly PROFILE_URL = '/profiles'
   public readonly LISTINGS_LIMIT = 20;
 
+  public readonly ONLY_WINES = false;
 
   public readonly TOKEN_KEY = 'token';
   public readonly USER_KEY = 'user';

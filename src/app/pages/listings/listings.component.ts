@@ -2,6 +2,8 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {DataService} from "../../services/data.service";
 import { Constants } from '../../app.constants';
 import {FormControl} from "@angular/forms";
+import {ScreenWidthDetectionService} from "../../services/screen-width-detection.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'ws-listings',
@@ -15,16 +17,18 @@ export class ListingsComponent implements OnInit {
   listingsLimit: number;
   moreToLoad: boolean = false;
   moreToLoadCategory: boolean = false;
-
   search = new FormControl;
   listingsToshow: any[];
+  mediumScreen: boolean;
+  private screenSubscription: Subscription;
 
   @ViewChild('category', {static: true}) category: ElementRef;
   @ViewChild('select', {static: true}) select: ElementRef;
 
   constructor(
     private dataService: DataService,
-    private constants: Constants
+    private constants: Constants,
+    private screenWidthService: ScreenWidthDetectionService
   ) {
     this.listingsLimit = constants.LISTINGS_LIMIT
   }
@@ -40,6 +44,10 @@ export class ListingsComponent implements OnInit {
       if (!value) {
         this.listingsToshow = this.listings;
       }
+    });
+
+    this.screenSubscription = this.screenWidthService.mediumScreen.subscribe((status: boolean) => {
+      this.mediumScreen = status;
     });
   }
 
@@ -74,13 +82,13 @@ export class ListingsComponent implements OnInit {
   }
 
   onGetCategory(event, fromSelect = false) {
-    console.log(event)
     let category: string;
     if (fromSelect) {
       category = event;
     } else {
       category = event.target.getAttribute('data-category');
     }
+
 
     //Go through span's
     const categories = this.category.nativeElement.querySelectorAll('span');
@@ -92,15 +100,21 @@ export class ListingsComponent implements OnInit {
     });
 
     //Go through select
-    this.select.nativeElement.value = category;
-    const options = this.select.nativeElement.querySelectorAll('option');
-    options.forEach((option) => {
-      option.classList.remove('active');
-      if (category === option.value) {
-        option.classList.add('active')
-      }
-    })
+    // this.select.nativeElement.value = category;
+    // const options = this.select.nativeElement.querySelectorAll('option');
+    // options.forEach((option) => {
+    //   option.classList.remove('active');
+    //   if (category === option.value) {
+    //     option.classList.add('active')
+    //   }
+    // })
+
     this.categoryListings = [];
+
+    if(category === "ws-wine" && !this.constants.ONLY_WINES) {
+      this.getListings(0)
+      return
+    }
     this.getCategory(category)
   }
 

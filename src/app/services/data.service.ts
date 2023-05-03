@@ -100,7 +100,12 @@ export class DataService {
   }
 
   getListings(offset: number = 0): Observable<any> {
-    const listingsUrl = `${this.listingsUrl}&limit=${this.listingsLimit}&offset=${offset}&sort=created`;
+    let tag = "";
+    if(this.constants.ONLY_WINES) {
+      tag = '&_tag=ws-wine'
+    }
+    const listingsUrl = `${this.listingsUrl}&limit=${this.listingsLimit}&offset=${offset}&sort=created${tag}`;
+    console.log(listingsUrl)
     return this.http.get(listingsUrl, httpOptions).pipe(retry(2));
   }
 
