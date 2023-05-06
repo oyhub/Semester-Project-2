@@ -1,14 +1,44 @@
 # SemesterProject2
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.4.
+This is a school assignment, where we will create an auction page.
+The brief is that an auction site is looking to launch a website where users can add items to be bid on and bid on items other users have put up for auction.
 
-## Development server
+#### Built with Angular
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Getting started
+
+### Installing
+
+1. Clone the repo:
+```
+git clone https://github.com/oyhub/Semester-Project-2.git
+```
+
+2. Install NPM Packages
+```
+npm install
+```
+
+### Development server
+To run a local development server with the project, do the following
+```
+npm run start
+```
+and navigate to 
+`http://localhost:4200/`
+
+### Customize
+You can customize the page by changing the variables in
+[src/app/app.constants.ts](src/app/app.constants.ts) and [src/styles/_variables.scss](src/styles/_variables.scss)
+
+```
+src/app/app.constants.ts
+src/styles/_variables.scss
+```
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ## Filter on wines
 The app is now set to show all listings from the auctoinhouse API. If you want to only show winebottles that are added from The Wine Seller,
