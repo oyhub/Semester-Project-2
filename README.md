@@ -1,9 +1,17 @@
-# SemesterProject2
+[![angular - 14.2.0](https://img.shields.io/badge/angular-14.2.0-blue?logo=angular)](https://angular.dev/)
+
+# The Wine Seller
 
 This is a school assignment, where we will create an auction page.
 The brief is that an auction site is looking to launch a website where users can add items to be bid on and bid on items other users have put up for auction.
 
-#### Built with Angular
+**The Wine Seller hompage example**
+![The Wine Seller homepage screenshot](/src/assets/images/homepageScreenshot.jpg)
+
+## Built with
+
+- [Angular](https://angular.io/)
+- [Sass](https://sass-lang.com/)
 
 ## Getting started
 
